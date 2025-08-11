@@ -5,45 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Datamaker MS-Word Multiple Choice Test</title>
 <style>
-  :root{
-    --accent:#107C41;
-    --bg:#f4f4f4;
-    --card:#fff;
-    --muted:#666;
-    --maxw:980px;
-  }
-  body{
-    margin:0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background:var(--bg);
-    color:#111;
-  }
-  .topbar {
-    background:var(--accent);
-    color:white;
-    padding:18px 12px;
-    text-align:center;
-    font-size:1.2rem;
-    font-weight:700;
-  }
-  .wrap{
-    max-width:var(--maxw);
-    margin:26px auto;
-    padding:0 16px;
-  }
-  .card{
-    background:var(--card);
-    border-radius:10px;
-    padding:22px;
-    box-shadow:0 6px 18px rgba(16,124,65,0.06);
-  }
+  :root{ --accent:#107C41; --bg:#f4f4f4; --card:#fff; --muted:#666; --maxw:980px; }
+  body{ margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; }
+  .topbar { background:var(--accent); color:white; padding:18px 12px; text-align:center; font-size:1.2rem; font-weight:700; }
+  .wrap{ max-width:var(--maxw); margin:26px auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:10px; padding:22px; box-shadow:0 6px 18px rgba(16,124,65,0.06); }
   .intro{ color:var(--muted); margin-bottom:18px; }
   .meta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
   .meta .field{ flex:1 1 300px; }
   label.input-label{ display:block; font-weight:600; margin-bottom:6px; }
-  input[type="text"], input[type="email"]{
-    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d0d0d0;
-  }
+  input[type="text"], input[type="email"]{ width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d0d0d0; }
   hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
   .question{ margin-bottom:14px; padding:12px; border-radius:8px; background:#fcfffd; border:1px solid #f0f6f1; }
   .q-header{ display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
@@ -51,6 +22,7 @@
   .q-text{ font-weight:600; font-size:0.98rem; flex:1 1 auto; }
   .options{ margin-top:8px; display:flex; flex-direction:column; gap:8px; }
   .option-label{ display:flex; gap:12px; align-items:center; padding:10px 12px; border-radius:8px; border:1px solid #eee; cursor:pointer; user-select:none; }
+  .option-label:hover{ background:#fafdf9; }
   .option-label input{ transform:scale(1.02); margin:0; }
   .submit-row{ margin-top:20px; display:flex; justify-content:flex-end; gap:12px; align-items:center; }
   button.submit-btn{ background:var(--accent); color:white; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
@@ -65,7 +37,7 @@
   <div class="wrap">
     <div class="card">
       <p class="intro">
-        Hi! Please complete this quiz to help us evaluate your understanding of the training. Thank you!
+        Hi! Please complete this quiz to help us evaluate your understanding of the training you were given. Thank you!
         <br><strong>Total: 52 Questions</strong>
       </p>
 
@@ -93,17 +65,16 @@
 
         <div id="result"></div>
         <p class="note">This content is neither created nor endorsed by Microsoft. The data you submit will be sent to the form owner.</p>
-
       </form>
     </div>
   </div>
 
 <script>
-/* --- CONFIG --- */
+/* ---------------- CONFIG ---------------- */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx27nvFJGoz2eiYMZ76eJXPjdBYdGqWksQX7lg_3pUMmlUZSbLhWL53SzHYk_nl5ec5Iw/exec";
 
-/* --- QUESTIONS: Q3..Q52 --- 
-   Format matches screenshot: { id, text, options:[ {t: "option text", c: true/false}, ... ] }
+/* ---------------- QUESTIONS (Q3..Q52) ----------------
+   Format: { id, text, options: [ {t: "option text", c: true/false}, ... ] }
 */
 const mcQuestions = [
   { id:3, text:"What is Microsoft Word?", options:[
@@ -418,36 +389,41 @@ const mcQuestions = [
   ]}
 ];
 
-/* --- Utils --- */
-function shuffleArray(a){
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+/* ---------------- HELPERS ---------------- */
+function escapeHtml(s){
+  return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 }
 
-/* --- Render (shuffle only MCQs) --- */
-let shuffledQuestions = [];
+function shuffleArray(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ---------------- RENDER ---------------- */
+let shuffledQuestions = []; // will hold the shuffled mcQuestions (order used for scoring too)
 document.addEventListener('DOMContentLoaded', () => {
-  // create a copy and shuffle it
+  // deep copy and shuffle
   shuffledQuestions = shuffleArray(JSON.parse(JSON.stringify(mcQuestions)));
+
   const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
 
   shuffledQuestions.forEach((q, idx) => {
     const displayNumber = idx + 3; // Q3..Q52
     const qDiv = document.createElement('div');
     qDiv.className = 'question';
 
-    // header
     const header = document.createElement('div');
     header.className = 'q-header';
     header.innerHTML = `<div class="q-number">${displayNumber}</div><div class="q-text">${escapeHtml(q.text)}</div>`;
     qDiv.appendChild(header);
 
-    // options
     const opts = document.createElement('div');
     opts.className = 'options';
+
     q.options.forEach((opt, oi) => {
       const optId = `q${q.id}_opt${oi}`;
       const label = document.createElement('label');
@@ -456,79 +432,78 @@ document.addEventListener('DOMContentLoaded', () => {
       label.innerHTML = `<input id="${optId}" type="radio" name="q_${q.id}" value="${escapeHtml(opt.t)}"> <span>${escapeHtml(opt.t)}</span>`;
       opts.appendChild(label);
     });
+
     qDiv.appendChild(opts);
     container.appendChild(qDiv);
   });
-
-  // make sure radios are not required globally (we check before submit)
-  // (if you want required per question, you can implement validation)
 });
 
-/* escape */
-function escapeHtml(s){
-  return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
-}
-
-/* --- Submit handler --- */
+/* ---------------- SUBMIT ---------------- */
 document.getElementById('quizForm').addEventListener('submit', async function(e){
   e.preventDefault();
 
-  // validation: ensure every MCQ has an answer
-  const totalMCQ = shuffledQuestions.length;
-  let allAnswered = true;
-  const answers = [];
+  // ensure form fields
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if(!name || !email){
+    alert('Please enter name and email.');
+    return;
+  }
 
+  // collect answers and check completeness
+  const answers = [];
+  let allAnswered = true;
   for(const q of shuffledQuestions){
     const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
-    const ansText = sel ? sel.value : "";
-    if(!ansText) { allAnswered = false; }
+    const ansText = sel ? sel.value : '';
+    if(!ansText) allAnswered = false;
     answers.push({ id: q.id, answer: ansText });
   }
 
   if(!allAnswered){
-    if(!confirm("Some questions are unanswered. Submit anyway?")) return;
+    if(!confirm('Some questions are unanswered. Do you want to submit anyway?')) return;
   }
 
   // scoring
   let score = 0;
   for(const q of shuffledQuestions){
     const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
-    const ansText = sel ? sel.value : "";
-    const correctOpt = q.options.find(o => o.c);
-    if(correctOpt && ansText === correctOpt.t) score++;
+    const ansText = sel ? sel.value : '';
+    const correct = q.options.find(o => o.c);
+    if(correct && ansText === correct.t) score++;
   }
 
-  // payload
+  // show result to participant
+  const resultDiv = document.getElementById('result');
+  resultDiv.textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
+
+  // payload for Apps Script
   const payload = {
     timestamp: new Date().toISOString(),
-    name: document.getElementById('name').value.trim(),
-    email: document.getElementById('email').value.trim(),
+    name: name,
+    email: email,
     score: score,
     total: shuffledQuestions.length,
     answers: answers
   };
 
-  // show score to participant only
-  const resultDiv = document.getElementById('result');
-  resultDiv.textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
-
-  // send to Google Apps Script (best-effort)
+  // send (best-effort)
   try {
-    const resp = await fetch(APPS_SCRIPT_URL, {
+    await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    // some Apps Script deployments return JSON; ignore if CORS/no-cors block occurs
-    // try to parse if possible
-    try { await resp.json(); } catch(e){ /* ignore parse errors */ }
+    // disable inputs to prevent re-submit
+    document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
   } catch(err){
-    console.warn('Submission to Apps Script failed (network/CORS):', err);
+    console.warn('Submit error:', err);
+    // still disable inputs
+    document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
   }
-
-  // disable form to prevent re-submit, keep result visible
-  this.querySelectorAll('input, button').forEach(i => i.disabled = true);
 });
+
+/* Reset on refresh/unload is default — form not persisted */
 </script>
 </body>
 </html>
