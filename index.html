@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Restart-on-Leave Questionnaire</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f7f7f7; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        h1 { text-align: center; }
+        label { display: block; margin-top: 15px; }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background: #005a9e; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Quick Survey</h1>
+    <p><strong>Note:</strong> If you leave or refresh this page, you will have to start again.</p>
+
+    <form id="questionnaire" onsubmit="submitForm(event)">
+        <label>Name:
+            <input type="text" name="name" required>
+        </label>
+
+        <label>Email:
+            <input type="email" name="email" required>
+        </label>
+
+        <label>What is your favorite hobby?
+            <textarea name="hobby" required></textarea>
+        </label>
+
+        <label>Choose your experience level:
+            <select name="experience" required>
+                <option value="">--Select--</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+            </select>
+        </label>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+function submitForm(event) {
+    event.preventDefault();
+    alert("Form submitted! Thank you for your responses.");
+    document.getElementById("questionnaire").reset();
+}
+
+// Clear form data on page unload (refresh, close, or navigation)
+window.addEventListener("beforeunload", function () {
+    document.getElementById("questionnaire").reset();
+});
+</script>
+
+</body>
+</html>
