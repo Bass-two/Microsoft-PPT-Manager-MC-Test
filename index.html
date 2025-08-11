@@ -184,7 +184,7 @@
   <script>
   // ---------------------- CONFIG ----------------------
   // Paste your deployed Google Apps Script web app URL here (the one you get after deploying).
-  const SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZJk7oEVSH7rz-ipVjrKGcxLxj952y93dcQBmhBR86M-yptDWzAGPjfXQX9DHJwmD-1A/exec";
 
   // ---------------------- QUESTIONS ----------------------
   // Name (Q1) and Email (Q2) are fixed fields above.
@@ -554,7 +554,7 @@
 
   // POST submission to Apps Script
   async function sendToSheet(payload){
-    if(!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR_WEB_APP_URL_HERE') !== -1){
+    if(!SCRIPT_URL || SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbwZJk7oEVSH7rz-ipVjrKGcxLxj952y93dcQBmhBR86M-yptDWzAGPjfXQX9DHJwmD-1A/exec') !== -1){
       console.warn('SCRIPT_URL not set - skipping POST to Google Sheet.');
       return {ok:false, message:'No script URL provided.'};
     }
