@@ -148,7 +148,7 @@
     <div class="card">
       <p class="intro">
         Hi! Would you mind completing this quiz? This is to help us evaluate your understanding of the training you were given. Thank you!
-        <br><strong>Total: 48 Points</strong>
+        <br><strong>Total: 50 Points</strong>
       </p>
 
       <form id="testForm" autocomplete="off" onsubmit="return handleSubmit(event)">
@@ -167,7 +167,7 @@
 
         <hr class="sep" />
 
-        <!-- Container for MCQs Q3..Q50 (shuffled) -->
+        <!-- Container for MCQs Q3..Q52 (shuffled) -->
         <div id="questionsContainer"></div>
 
         <div class="submit-row">
@@ -188,7 +188,7 @@
 
   // ---------------------- QUESTIONS ----------------------
   // Name (Q1) and Email (Q2) are fixed fields above.
-  // Multiple-choice questions are Q3..Q50 (48 questions total).
+  // Multiple-choice questions are Q3..Q52 (50 questions total).
   // Correct answers are embedded (client-side scoring). Edit the 'c' boolean to change correct answers.
   const mcQuestions = [
     { id: 3, text: "What is the keyboard shortcut to open the Filter menu in Excel?", options: [
