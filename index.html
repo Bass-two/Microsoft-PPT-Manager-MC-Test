@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Datamaker MS-PowerPoint Multiple Choice Test</title>
-<style>
-  :root{ --accent:#107C41; --bg:#f4f4f4; --card:#fff; --muted:#666; --maxw:980px; }
-  body{ margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; }
-  .topbar { background:var(--accent); color:white; padding:18px 12px; text-align:center; font-size:1.2rem; font-weight:700; }
-  .wrap{ max-width:var(--maxw); margin:26px auto; padding:0 16px; }
-  .card{ background:var(--card); border-radius:10px; padding:22px; box-shadow:0 6px 18px rgba(16,124,65,0.06); }
-  .intro{ color:var(--muted); margin-bottom:18px; }
-  .meta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
-  .meta .field{ flex:1 1 300px; }
-  label.input-label{ display:block; font-weight:600; margin-bottom:6px; }
-  input[type="text"], input[type="email"]{ width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d0d0d0; }
-  hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
-  .question{ margin-bottom:14px; padding:12px; border-radius:8px; background:#fcfffd; border:1px solid #f0f6f1; }
-  .q-header{ display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
-  .q-number{ min-width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; }
-  .q-text{ font-weight:600; font-size:0.98rem; flex:1 1 auto; }
-  .options{ margin-top:8px; display:flex; flex-direction:column; gap:8px; }
-  .option-label{ display:flex; gap:12px; align-items:center; padding:10px 12px; border-radius:8px; border:1px solid #eee; cursor:pointer; user-select:none; }
-  .option-label:hover{ background:#fafdf9; }
-  .option-label input{ transform:scale(1.02); margin:0; }
-  .submit-row{ margin-top:20px; display:flex; justify-content:flex-end; gap:12px; align-items:center; }
-  button.submit-btn{ background:var(--accent); color:white; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
-  button.submit-btn:hover{ background:#0e6b39; }
-  .note{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
-  #result{ margin-top:14px; font-weight:700; text-align:center; }
-  @media (max-width:720px){ .meta{ flex-direction:column; } .submit-row{ justify-content:center; } }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Datamaker MS-PowerPoint Multiple Choice Test</title>
+  <style>
+    :root{ --accent:#107C41; --bg:#f4f4f4; --card:#fff; --muted:#666; --maxw:980px; }
+    body{ margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; }
+    .topbar { background:var(--accent); color:white; padding:18px 12px; text-align:center; font-size:1.2rem; font-weight:700; }
+    .wrap{ max-width:var(--maxw); margin:26px auto; padding:0 16px; }
+    .card{ background:var(--card); border-radius:10px; padding:22px; box-shadow:0 6px 18px rgba(16,124,65,0.06); }
+    .intro{ color:var(--muted); margin-bottom:18px; }
+    .meta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+    .meta .field{ flex:1 1 300px; }
+    label.input-label{ display:block; font-weight:600; margin-bottom:6px; }
+    input[type="text"], input[type="email"]{ width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d0d0d0; }
+    hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
+    .question{ margin-bottom:14px; padding:12px; border-radius:8px; background:#fcfffd; border:1px solid #f0f6f1; }
+    .q-header{ display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+    .q-number{ min-width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; }
+    .q-text{ font-weight:600; font-size:0.98rem; flex:1 1 auto; }
+    .options{ margin-top:8px; display:flex; flex-direction:column; gap:8px; }
+    .option-label{ display:flex; gap:12px; align-items:center; padding:10px 12px; border-radius:8px; border:1px solid #eee; cursor:pointer; user-select:none; }
+    .option-label:hover{ background:#fafdf9; }
+    .option-label input{ transform:scale(1.02); margin:0; }
+    .submit-row{ margin-top:20px; display:flex; justify-content:flex-end; gap:12px; align-items:center; }
+    button.submit-btn{ background:var(--accent); color:white; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
+    button.submit-btn:hover{ background:#0e6b39; }
+    .note{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
+    #result{ margin-top:14px; font-weight:700; text-align:center; }
+    @media (max-width:720px){ .meta{ flex-direction:column; } .submit-row{ justify-content:center; } }
+  </style>
 </head>
 <body>
   <div class="topbar">Datamaker MS-PowerPoint Multiple Choice Test</div>
@@ -42,8 +42,7 @@
         <br><strong>Total: 52 Questions</strong>
       </p>
 
-      <form id="quizForm" autocomplete="off">
-
+      <form id="pptForm" autocomplete="off">
         <!-- Q1 & Q2 fixed -->
         <div class="meta">
           <div class="field">
@@ -58,7 +57,6 @@
 
         <hr class="sep" />
 
-        <!-- Container for MCQs Q3..Q52 (shuffled) -->
         <div id="questionsContainer"></div>
 
         <div class="submit-row">
@@ -68,7 +66,6 @@
 
         <div id="result"></div>
         <p class="note">This content is neither created nor endorsed by Microsoft. The data you submit will be sent to the form owner.</p>
-
       </form>
     </div>
   </div>
@@ -77,7 +74,7 @@
 /* ---------------- CONFIG ---------------- */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZBG7K-2EgDy9orsUkzjlug-0Rl8ubjqktFErdCUIRSEkTUw8UFP94iNG78qslMX3I/exec";
 
-/* ---------------- QUESTIONS ---------------- */
+/* ---------------- QUESTIONS (Q3..Q52) ---------------- */
 const mcQuestions = [
   { id:3, text:"What is Microsoft PowerPoint?", options:[
       {t:"A spreadsheet application", c:false},
@@ -111,17 +108,17 @@ const mcQuestions = [
       {t:"Design", c:true},
       {t:"View", c:false}
   ]},
-  { id:8, text:"What is the purpose of the 'Slide Master' in PowerPoint?", options:[
+  { id:8, text:"What is the purpose of the \"Slide Master\" in PowerPoint?", options:[
       {t:"To add animation effects to a slide", c:false},
       {t:"To create a new slide", c:false},
       {t:"To apply consistent formatting to all slides", c:true},
       {t:"To add notes to a slide", c:false}
   ]},
   { id:9, text:"Which of the following is not a way to add a new slide to a PowerPoint presentation?", options:[
-      {t:"Clicking the 'New Slide' button on the Ribbon", c:false},
+      {t:"Clicking the \"New Slide\" button on the Ribbon", c:false},
       {t:"Pressing Ctrl + M on the keyboard", c:false},
-      {t:"Right-clicking on a slide and selecting 'New Slide'", c:false},
-      {t:"Clicking the 'Save' button on the Ribbon", c:true},
+      {t:"Right-clicking on a slide and selecting \"New Slide\"", c:false},
+      {t:"Clicking the \"Save\" button on the Ribbon", c:true},
       {t:"All of the above", c:false}
   ]},
   { id:10, text:"Which of the following is not a multimedia element that can be added to a slide in PowerPoint?", options:[
@@ -131,25 +128,25 @@ const mcQuestions = [
       {t:"Spreadsheet", c:true},
       {t:"All of the above", c:false}
   ]},
-  { id:11, text:"What is the purpose of the 'Transitions' tab in PowerPoint?", options:[
+  { id:11, text:"What is the purpose of the \"Transitions\" tab in PowerPoint?", options:[
       {t:"To apply animation effects to objects on a slide", c:false},
       {t:"To add multimedia content to a slide", c:false},
       {t:"To add speaker notes to a slide", c:false},
       {t:"To apply visual effects between slides", c:true}
   ]},
-  { id:12, text:"What is the purpose of the 'Animation' tab in PowerPoint?", options:[
+  { id:12, text:"What is the purpose of the \"Animation\" tab in PowerPoint?", options:[
       {t:"To add multimedia content to a slide", c:false},
       {t:"To apply visual effects between slides", c:false},
       {t:"To apply animation effects to objects on a slide", c:true},
       {t:"To insert speaker notes in a slide", c:false}
   ]},
-  { id:13, text:"What is the purpose of the 'Presenter View' in PowerPoint?", options:[
+  { id:13, text:"What is the purpose of the \"Presenter View\" in PowerPoint?", options:[
       {t:"To preview the presentation as it will appear to the audience", c:false},
       {t:"To view the presentation on a different monitor while controlling it from the primary monitor", c:true},
       {t:"To edit the presentation in a split-screen view", c:false},
       {t:"To add multimedia content to a slide", c:false}
   ]},
-  { id:14, text:"Which tab on the Ribbon contains the 'Slide Size' option?", options:[
+  { id:14, text:"Which tab on the Ribbon contains the \"Slide Size\" option?", options:[
       {t:"Home", c:false},
       {t:"Insert", c:false},
       {t:"Design", c:true},
@@ -173,7 +170,7 @@ const mcQuestions = [
       {t:"Design", c:false},
       {t:"Transitions", c:false}
   ]},
-  { id:18, text:"What is the purpose of the 'Format Painter' in Microsoft PowerPoint?", options:[
+  { id:18, text:"What is the purpose of the \"Format Painter\" in Microsoft PowerPoint?", options:[
       {t:"It allows you to copy and paste text formatting from one place to another.", c:true},
       {t:"It allows you to change the font size of your text.", c:false},
       {t:"It allows you to apply animations to your text.", c:false},
@@ -186,20 +183,20 @@ const mcQuestions = [
       {t:"Ctrl + K", c:false},
       {t:"None of the above", c:false}
   ]},
-  { id:20, text:"Which tab on the Ribbon contains the 'Font' options in Microsoft PowerPoint?", options:[
+  { id:20, text:"Which tab on the Ribbon contains the \"Font\" options in Microsoft PowerPoint?", options:[
       {t:"Home", c:true},
       {t:"Insert", c:false},
       {t:"Design", c:false},
       {t:"Transitions", c:false},
       {t:"Edit", c:false}
   ]},
-  { id:21, text:"What is the purpose of the 'Slide Master' in Microsoft PowerPoint?", options:[
+  { id:21, text:"What is the purpose of the \"Slide Master\" in Microsoft PowerPoint?", options:[
       {t:"It allows you to create custom slide layouts.", c:true},
       {t:"It allows you to add multimedia elements to your slides.", c:false},
       {t:"It allows you to create custom animations.", c:false},
       {t:"It allows you to add comments to your slides", c:false}
   ]},
-  { id:22, text:"Which file format can be added to a power point show?", options:[
+  { id:22, text:"Which file format can be added to a PowerPoint show?", options:[
       {t:".gif", c:false},
       {t:".png", c:false},
       {t:".wav", c:false},
@@ -333,7 +330,7 @@ const mcQuestions = [
   { id:43, text:"To give a PowerPoint presentation to a large audience, you:", options:[
       {t:"Set up your computer in a large auditorium, and click large, auditorium, OK", c:false},
       {t:"Click the slide you wish the audience to see in normal view, then click the next slide, and so on", c:false},
-      {t:"Choose either view, slide show or slide show, view", c:true},
+      {t:"Choose either view, slide show or slide show, view show", c:true},
       {t:"Slick slide show, OK", c:false}
   ]},
   { id:44, text:"What is to be use to add text in Slide?", options:[
@@ -385,7 +382,7 @@ const mcQuestions = [
       {t:"Press Escape", c:true},
       {t:"Press Ctrl+S", c:false}
   ]},
-  { id:52, text:"Power point can display data from which of the following add-in software of MS office", options:[
+  { id:52, text:"PowerPoint can display data from which of the following add-in software of MS office", options:[
       {t:"Organization Chart", c:false},
       {t:"Photo Album", c:false},
       {t:"Equation Editor", c:false},
@@ -399,12 +396,12 @@ function escapeHtml(s){
   return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 }
 
-function shuffleArray(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+function shuffleArray(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return arr;
+  return a;
 }
 
 /* ---------------- RENDER ---------------- */
@@ -426,7 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const opts = document.createElement('div');
     opts.className = 'options';
-
     q.options.forEach((opt, oi) => {
       const optId = `q${q.id}_opt${oi}`;
       const label = document.createElement('label');
@@ -442,13 +438,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ---------------- SUBMIT ---------------- */
-document.getElementById('quizForm').addEventListener('submit', async function(e){
+document.getElementById('pptForm').addEventListener('submit', async function(e){
   e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  if(!name || !email){ alert('Please enter name and email.'); return; }
+  if(!name || !email){
+    alert('Please enter name and email.');
+    return;
+  }
 
+  // collect answers
   const answers = [];
   let allAnswered = true;
   for(const q of shuffledQuestions){
@@ -462,38 +462,39 @@ document.getElementById('quizForm').addEventListener('submit', async function(e)
     if(!confirm('Some questions are unanswered. Submit anyway?')) return;
   }
 
+  // scoring
   let score = 0;
   for(const q of shuffledQuestions){
     const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
     const ansText = sel ? sel.value : '';
-    const correct = q.options.find(o => o.c);
-    if(correct && ansText === correct.t) score++;
+    const correctOpt = q.options.find(o=>o.c);
+    if(correctOpt && ansText === correctOpt.t) score++;
   }
 
+  // show final score to user
   document.getElementById('result').textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
 
   const payload = {
     timestamp: new Date().toISOString(),
-    name,
-    email,
-    score,
+    name: name,
+    email: email,
+    score: score,
     total: shuffledQuestions.length,
-    answers
+    answers: answers
   };
 
   try {
     await fetch(APPS_SCRIPT_URL, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    // disable inputs to avoid resubmission
-    document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
   } catch(err){
-    console.warn('Submission error', err);
-    // still disable inputs
-    document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
+    console.warn('Send error', err);
   }
+
+  // disable inputs to prevent re-submit
+  document.querySelectorAll('#pptForm input, #pptForm button').forEach(el => el.disabled = true);
 });
 </script>
 </body>
