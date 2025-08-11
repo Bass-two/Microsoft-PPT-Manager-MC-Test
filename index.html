@@ -1,116 +1,636 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Restart-on-Leave Questionnaire</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            background: #f4f4f4; 
-        }
-        .header {
-            background: #107C41; /* Microsoft Forms green */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-        .container { 
-            max-width: 700px; 
-            margin: 40px auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-        }
-        h2 { 
-            margin-top: 0; 
-            color: #107C41;
-        }
-        label { 
-            display: block; 
-            margin-top: 20px; 
-            font-weight: 500; 
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 6px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        input:focus, textarea:focus, select:focus {
-            border-color: #107C41;
-            outline: none;
-        }
-        button {
-            margin-top: 25px;
-            padding: 12px 20px;
-            background: #107C41;
-            color: white;
-            font-size: 1rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        button:hover { 
-            background: #0e6b39; 
-        }
-        .note {
-            font-size: 0.9rem; 
-            color: #666; 
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Datamaker MS-Excel Multiple Choice Test</title>
+  <style>
+    :root{
+      --accent:#107C41;
+      --card-bg:#fff;
+      --page-bg:#f4f4f4;
+      --muted:#666;
+      --maxw:980px;
+    }
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--page-bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+    }
+    .topbar {
+      background:var(--accent);
+      color:white;
+      padding:22px 16px;
+      text-align:center;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    .wrap{
+      max-width:var(--maxw);
+      margin:28px auto;
+      padding:0 16px;
+    }
+    .card{
+      background:var(--card-bg);
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(16,124,65,0.06);
+      padding:28px;
+      overflow:auto;
+    }
+    .intro{
+      color:var(--muted);
+      margin-bottom:18px;
+      font-size:0.95rem;
+    }
+    .meta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .meta .field{
+      flex:1 1 260px;
+    }
+    label.input-label{
+      display:block;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    input[type="text"], input[type="email"]{
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #d0d0d0;
+      font-size:0.98rem;
+    }
+    hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
+    .question{
+      margin-bottom:14px;
+      padding:12px;
+      border-radius:8px;
+      background:#fcfffd;
+      border:1px solid #f0f6f1;
+    }
+    .q-header{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .q-number{
+      min-width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--accent);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      box-shadow:0 2px 6px rgba(16,124,65,0.12);
+    }
+    .q-text{
+      font-weight:600;
+      font-size:0.98rem;
+      flex:1 1 auto;
+    }
+    .options{
+      margin-top:8px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .option-label{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #eee;
+      cursor:pointer;
+      user-select:none;
+    }
+    .option-label:hover{ background:#fafdf9; }
+    .option-label input{ transform:scale(1.02); margin:0; }
+    .submit-row{
+      margin-top:20px;
+      display:flex;
+      justify-content:flex-end;
+      gap:12px;
+      align-items:center;
+    }
+    button.submit-btn{
+      background:var(--accent);
+      color:white;
+      padding:12px 18px;
+      border-radius:8px;
+      border:none;
+      font-weight:700;
+      cursor:pointer;
+      font-size:1rem;
+    }
+    button.submit-btn:hover{ background:#0e6b39; }
+    .note{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
+    @media (max-width:720px){
+      .meta{ flex-direction:column; }
+      .submit-row{ justify-content:center; }
+    }
+  </style>
 </head>
 <body>
+  <div class="topbar">Datamaker MS-Excel Multiple Choice Test</div>
 
-<div class="header">Quick Survey</div>
+  <div class="wrap">
+    <div class="card">
+      <p class="intro">
+        Hi! Would you mind completing this quiz? This is to help us evaluate your understanding of the training you were given. Thank you!
+        <br><strong>Total: 48 Points</strong>
+      </p>
 
-<div class="container">
-    <p class="note"><strong>Note:</strong> If you leave or refresh this page, you will have to start again.</p>
+      <form id="testForm" autocomplete="off" onsubmit="return handleSubmit(event)">
 
-    <form id="questionnaire" onsubmit="submitForm(event)">
-        <label>Name:
-            <input type="text" name="name" placeholder="Enter your name" required>
-        </label>
+        <!-- Q1 & Q2 fixed at top -->
+        <div class="meta">
+          <div class="field">
+            <label class="input-label" for="name">Q1 — Name *</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          <div class="field">
+            <label class="input-label" for="email">Q2 — Email *</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+        </div>
 
-        <label>Email:
-            <input type="email" name="email" placeholder="Enter your email" required>
-        </label>
+        <hr class="sep" />
 
-        <label>What is your favorite hobby?
-            <textarea name="hobby" placeholder="Type your answer here" required></textarea>
-        </label>
+        <!-- Container for MCQs Q3..Q50 (shuffled) -->
+        <div id="questionsContainer"></div>
 
-        <label>Choose your experience level:
-            <select name="experience" required>
-                <option value="">--Select--</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="expert">Expert</option>
-            </select>
-        </label>
+        <div class="submit-row">
+          <div class="note">Note: Leaving or refreshing will restart the test and reshuffle questions.</div>
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
 
-        <button type="submit">Submit</button>
-    </form>
-</div>
+        <p class="note">This content is neither created nor endorsed by Microsoft. The data you submit will be sent to the form owner.</p>
 
-<script>
-function submitForm(event) {
-    event.preventDefault();
-    alert("Form submitted! Thank you for your responses.");
-    document.getElementById("questionnaire").reset();
-}
+      </form>
+    </div>
+  </div>
 
-// Clear form data on page unload (refresh, close, or navigation)
-window.addEventListener("beforeunload", function () {
-    document.getElementById("questionnaire").reset();
-});
-</script>
+  <script>
+  // ---------------------- CONFIG ----------------------
+  // Paste your deployed Google Apps Script web app URL here (the one you get after deploying).
+  const SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
 
+  // ---------------------- QUESTIONS ----------------------
+  // Name (Q1) and Email (Q2) are fixed fields above.
+  // Multiple-choice questions are Q3..Q50 (48 questions total).
+  // Correct answers are embedded (client-side scoring). Edit the 'c' boolean to change correct answers.
+  const mcQuestions = [
+    { id: 3, text: "What is the keyboard shortcut to open the Filter menu in Excel?", options: [
+        {t:"CTRL + F", c:false},
+        {t:"CTRL + L", c:false},
+        {t:"CTRL + SHIFT + L", c:true},
+        {t:"ALT + D + F + F", c:false}
+      ]},
+    { id: 4, text: "Which of the following filtering options is NOT available in the Excel AutoFilter menu?", options: [
+        {t:"Text Filters", c:false},
+        {t:"Color Filters", c:false},
+        {t:"Value Filters", c:false},
+        {t:"Formula Filters", c:true}
+      ]},
+    { id: 5, text: "When sorting data in Excel, what happens if multiple columns are selected before sorting?", options: [
+        {t:"Only the first column will be sorted", c:false},
+        {t:"Excel sorts each column independently", c:false},
+        {t:"Excel asks for a sorting priority", c:false},
+        {t:"Excel sorts the selected data as a whole", c:true}
+      ]},
+    { id: 6, text: "How do you apply a custom sort where \"High Priority\" appears first, followed by \"Medium Priority,\" then \"Low Priority\"?", options: [
+        {t:"Use an ascending alphabetical sort", c:false},
+        {t:"Apply a value filter", c:false},
+        {t:"Use a custom sort list in the Sort dialog box", c:true},
+        {t:"Use the Filter function", c:false}
+      ]},
+    { id: 7, text: "Which function allows filtering data dynamically in Excel?", options: [
+        {t:"SORT()", c:false},
+        {t:"FILTER()", c:true},
+        {t:"SORTBY()", c:false},
+        {t:"UNIQUE()", c:false}
+      ]},
+    { id: 8, text: "What is the result of =TEXTJOIN(\",\",TRUE,\"Apple\",\"\",\"Banana\",\"Grape\")?", options: [
+        {t:"Apple,Banana,Grape", c:true},
+        {t:"Apple,,Banana,Grape", c:false},
+        {t:"Apple Banana Grape", c:false},
+        {t:"Apple,Banana,Grape,", c:false}
+      ]},
+    { id: 9, text: "If A1 contains \"Excel 2025 Guide\", what does =TEXTBEFORE(A1,\" \") return?", options: [
+        {t:"Excel", c:true},
+        {t:"Excel 2025", c:false},
+        {t:"2025 Guide", c:false},
+        {t:"Guide", c:false}
+      ]},
+    { id: 10, text: "What does =TEXTAFTER(A1,\"2025\") return if A1 contains \"Microsoft Excel 2025 Guide\"?", options: [
+        {t:"Guide", c:true},
+        {t:"Microsoft Excel", c:false},
+        {t:"Excel", c:false},
+        {t:"(none)", c:false}
+      ]},
+    { id: 11, text: "What does =CONCAT(A1:A3) do?", options: [
+        {t:"Joins text from A1, A2, and A3 into one string", c:true},
+        {t:"Returns an array of individual values", c:false},
+        {t:"Inserts commas between each value", c:false},
+        {t:"Only returns A1’s value", c:false}
+      ]},
+    { id: 12, text: "If A1 = \"Data\", A2 = \"Science\", and A3 = \"Excel\", what does =TEXTJOIN(\"- \" ,FALSE,A1:A3) return?", options: [
+        {t:"Data-Science-Excel", c:true},
+        {t:"Data, Science, Excel", c:false},
+        {t:"Data Science Excel", c:false},
+        {t:"Data-Science-Excel-", c:false}
+      ]},
+    { id: 13, text: "What does =IF(A1>10,\"High\",\"Low\") return if A1 contains 8?", options: [
+        {t:"High", c:false},
+        {t:"Low", c:true},
+        {t:"TRUE", c:false},
+        {t:"FALSE", c:false}
+      ]},
+    { id: 14, text: "What function returns \"Pass\" for values greater than 50 and \"Fail\" otherwise?", options: [
+        {t:"=IF(A1>50,\"Pass\",\"Fail\")", c:true},
+        {t:"=IF(A1<50,\"Fail\",\"Pass\")", c:false},
+        {t:"=IF(A1=\"Pass\",\">50\",\"Fail\")", c:false},
+        {t:"=IF(A1>50,\"Fail\",\"Pass\")", c:false}
+      ]},
+    { id: 15, text: "What does =IFS(A1>90,\"A\",A1>80,\"B\",A1>70,\"C\",TRUE,\"F\") return if A1=85?", options: [
+        {t:"A", c:false},
+        {t:"B", c:true},
+        {t:"C", c:false},
+        {t:"F", c:false}
+      ]},
+    { id: 16, text: "What function returns TRUE if A1 contains \"Excel\" anywhere in the text?", options: [
+        {t:"=SEARCH(\"Excel\",A1)>0", c:true},
+        {t:"=IF(A1=\"Excel\",TRUE,FALSE)", c:false},
+        {t:"=IF(SEARCH(\"Excel\",A1),\"TRUE\",\"FALSE\")", c:false},
+        {t:"=FIND(A1,\"Excel\")", c:false}
+      ]},
+    { id: 17, text: "Which function calculates a running total in column B based on values in column A?", options: [
+        {t:"=SUM(A$1:A1)", c:true},
+        {t:"=CUMSUM(A1:A10)", c:false},
+        {t:"=RUNNINGTOTAL(A1:A10)", c:false},
+        {t:"=ACCUMULATE(A1:A10)", c:false}
+      ]},
+    { id: 18, text: "Which feature helps track changes made to a workbook?", options: [
+        {t:"Track Changes", c:true},
+        {t:"Change Log", c:false},
+        {t:"History Panel", c:false},
+        {t:"Formula Audit", c:false}
+      ]},
+    { id: 19, text: "What is the maximum number of rows in an Excel worksheet?", options: [
+        {t:"1,048,576", c:true},
+        {t:"65,536", c:false},
+        {t:"500,000", c:false},
+        {t:"2,147,483,648", c:false}
+      ]},
+    { id: 20, text: "What is the default file extension for an Excel workbook?", options: [
+        {t:".xls", c:false},
+        {t:".xlsx", c:true},
+        {t:".csv", c:false},
+        {t:".txt", c:false}
+      ]},
+    { id: 21, text: "What does pressing CTRL + 1 do in Excel?", options: [
+        {t:"Opens the Format Cells dialog box", c:true},
+        {t:"Opens the Formula Auditing menu", c:false},
+        {t:"Inserts a new worksheet", c:false},
+        {t:"Renames the active cell", c:false}
+      ]},
+    { id: 22, text: "What is the purpose of \"Freeze Panes\" in Excel?", options: [
+        {t:"It locks specific rows/columns while scrolling", c:true},
+        {t:"It prevents data deletion", c:false},
+        {t:"It locks the workbook", c:false},
+        {t:"It hides empty rows", c:false}
+      ]},
+    { id: 23, text: "Which Excel feature allows you to filter a dataset dynamically based on user input?", options: [
+        {t:"PivotTable", c:false},
+        {t:"Advanced Filter", c:true},
+        {t:"Data Validation", c:false},
+        {t:"Slicers", c:false}
+      ]},
+    { id: 24, text: "What happens if you apply a filter and then delete a filtered-out row?", options: [
+        {t:"The row remains hidden but is deleted when the filter is cleared", c:false},
+        {t:"The row is permanently deleted", c:true},
+        {t:"The row is restored when the filter is removed", c:false},
+        {t:"The filter gets removed automatically", c:false}
+      ]},
+    { id: 25, text: "What function sorts a dataset based on a specified column?", options: [
+        {t:"SORT()", c:true},
+        {t:"FILTER()", c:false},
+        {t:"SORTBY()", c:false},
+        {t:"UNIQUE()", c:false}
+      ]},
+    { id: 26, text: "In a custom sort, how can you sort by multiple columns?", options: [
+        {t:'Use "Sort & Filter" and add multiple levels', c:true},
+        {t:"Use the SORT() function", c:false},
+        {t:"Apply an Advanced Filter", c:false},
+        {t:"Sort one column, then another manually", c:false}
+      ]},
+    { id: 27, text: "What is the difference between SEARCH(\"Excel\", A1) and FIND(\"Excel\", A1)?", options: [
+        {t:"SEARCH() is case-sensitive, FIND() is not", c:false},
+        {t:"FIND() is case-sensitive, SEARCH() is not", c:true},
+        {t:"SEARCH() returns an error if text is not found, FIND() does not", c:false},
+        {t:"Both return the same results", c:false}
+      ]},
+    { id: 28, text: "What is the output of =TEXTAFTER(\"Excel2025\", \"Excel\")?", options: [
+        {t:"2025", c:true},
+        {t:"Excel2025", c:false},
+        {t:"Excel", c:false},
+        {t:"#VALUE!", c:false}
+      ]},
+    { id: 29, text: "What does =MID(\"Microsoft Excel\",6,5) return?", options: [
+        {t:"soft", c:true},
+        {t:"soft (includes the space)", c:false},
+        {t:"Micro", c:false},
+        {t:"soft E", c:false}
+      ]},
+    { id: 30, text: "What is the result of =TEXTBEFORE(\"Excel_Training_2025\", \" _ \" , 2)?", options: [
+        {t:"Excel", c:true},
+        {t:"Excel _ Training", c:false},
+        {t:"Training", c:false},
+        {t:"2025", c:false}
+      ]},
+    { id: 31, text: "Which function helps return one value if a condition is TRUE and another if FALSE?", options: [
+        {t:"SWITCH()", c:false},
+        {t:"IF()", c:true},
+        {t:"IFS()", c:false},
+        {t:"VLOOKUP()", c:false}
+      ]},
+    { id: 32, text: "What does =IF(A1=\"\", \"Empty\", \"Not Empty\") return if A1 contains only a space?", options: [
+        {t:"Empty", c:false},
+        {t:"Not Empty", c:true},
+        {t:"#VALUE!", c:false},
+        {t:"0", c:false}
+      ]},
+    { id: 33, text: "Which shortcut applies bold formatting in Excel?", options: [
+        {t:"CTRL + B", c:true},
+        {t:"CTRL + I", c:false},
+        {t:"CTRL + U", c:false},
+        {t:"CTRL + SHIFT + B", c:false}
+      ]},
+    { id: 34, text: "If a cell is formatted as \"Accounting\", how does a negative value appear?", options: [
+        {t:"Red text", c:false},
+        {t:"(123.45)", c:true},
+        {t:"-123.45", c:false},
+        {t:"$123.45", c:false}
+      ]},
+    { id: 35, text: "What is the correct cell reference for column B, row 10?", options: [
+        {t:"B10", c:true},
+        {t:"10B", c:false},
+        {t:"R10C2", c:false},
+        {t:"B-10", c:false}
+      ]},
+    { id: 36, text: "Which formula is an absolute reference?", options: [
+        {t:"$A$1", c:true},
+        {t:"A1", c:false},
+        {t:"A$1", c:false},
+        {t:"R1C1", c:false}
+      ]},
+    { id: 37, text: "Which of the following refers to all the cells in column D?", options: [
+        {t:"D:D", c:true},
+        {t:"D1:D10000", c:false},
+        {t:"D$1:D$1000", c:false},
+        {t:"D*", c:false}
+      ]},
+    { id: 38, text: "What happens when you press CTRL + Enter after entering a formula?", options: [
+        {t:"The formula is copied to adjacent cells", c:false},
+        {t:"The formula is entered without moving the cursor", c:true},
+        {t:"The active cell moves to the next row", c:false},
+        {t:"The formula is entered as an array formula", c:false}
+      ]},
+    { id: 39, text: "What happens if you enter a value and press ALT + Enter?", options: [
+        {t:"A new row is inserted", c:false},
+        {t:"The text wraps within the same cell", c:true},
+        {t:"The value is copied", c:false},
+        {t:"The text becomes bold", c:false}
+      ]},
+    { id: 40, text: "Which number format automatically adds decimal places?", options: [
+        {t:"Accounting", c:true},
+        {t:"General", c:false},
+        {t:"Text", c:false},
+        {t:"Currency", c:false}
+      ]},
+    { id: 41, text: "If a value is displayed as #######, what is the issue?", options: [
+        {t:"The column width is too small", c:true},
+        {t:"The value is negative", c:false},
+        {t:"The cell contains text, not numbers", c:false},
+        {t:"The formula is incorrect", c:false}
+      ]},
+    { id: 42, text: "How can you round a number to two decimal places without changing the stored value?", options: [
+        {t:'Format the cell as "Number" with 2 decimal places', c:true},
+        {t:"Use the ROUND() function", c:false},
+        {t:"Multiply by 100 and divide by 100", c:false},
+        {t:"Convert the number to text", c:false}
+      ]},
+    { id: 43, text: "What does CTRL + Z do in Excel?", options: [
+        {t:"Undo the last action", c:true},
+        {t:"Redo the last action", c:false},
+        {t:"Zoom the worksheet", c:false},
+        {t:"Open the format menu", c:false}
+      ]},
+    { id: 44, text: "What is the default font in Excel 365?", options: [
+        {t:"Calibri", c:true},
+        {t:"Arial", c:false},
+        {t:"Times New Roman", c:false},
+        {t:"Verdana", c:false}
+      ]},
+    { id: 45, text: "What function would you use to return an approximate match when searching for a value in a sorted list?", options: [
+        {t:"VLOOKUP with TRUE as the last argument", c:true},
+        {t:"HLOOKUP with FALSE as the last argument", c:false},
+        {t:"XLOOKUP with an exact match mode", c:false},
+        {t:"INDEX with MATCH using an exact match", c:false}
+      ]},
+    { id: 46, text: "Which function allows you to search for a value in a column and return a corresponding value from another column, without requiring the data to be sorted?", options: [
+        {t:"INDEX", c:false},
+        {t:"VLOOKUP", c:false},
+        {t:"HLOOKUP", c:false},
+        {t:"XLOOKUP", c:true}
+      ]},
+    { id: 47, text: "What is the primary difference between VLOOKUP and INDEX-MATCH?", options: [
+        {t:"VLOOKUP allows searching both horizontally and vertically, while INDEX- MATCH only works vertically", c:false},
+        {t:"INDEX-MATCH is more flexible as it allows searching to the left, whereas VLOOKUP only searches to the right", c:true},
+        {t:"VLOOKUP is always faster than INDEX-MATCH", c:false},
+        {t:"INDEX-MATCH requires data to be sorted, while VLOOKUP does not", c:false}
+      ]},
+    { id: 48, text: "Which function returns the row number of a specified value within a given range?", options: [
+        {t:"INDEX", c:false},
+        {t:"MATCH", c:true},
+        {t:"HLOOKUP", c:false},
+        {t:"FIND", c:false}
+      ]},
+    { id: 49, text: "If A1:A10 contains numbers and you want to sum values greater than 50, which function should you use?", options: [
+        {t:"SUM(A1:A10)", c:false},
+        {t:'SUMIF(A1:A10, \">50\")', c:true},
+        {t:"COUNTIF(A1:A10, \">50\")", c:false},
+        {t:'SUMIFS(A1:A10, A1:A10, \">50\")', c:false}
+      ]},
+    { id: 50, text: "What function should you use to count the number of cells in range A1:A100 that contain values greater than 10 and less than 50?", options: [
+        {t:'COUNTIF(A1:A100, \">10\")', c:false},
+        {t:'COUNTIFS(A1:A100, \">10\", A1:A100, \"<50\")', c:true},
+        {t:'SUMIF(A1:A100, \">10\")', c:false},
+        {t:'IF(A1:A100, \">10\", \"<50\")', c:false}
+      ]}
+  ];
+
+  // ---------------------- UTILS ----------------------
+  function shuffleArray(a){
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+  }
+
+  // Render only MCQs and shuffle them; keep Q1 & Q2 fixed above
+  function renderMCQs(){
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    const qs = JSON.parse(JSON.stringify(mcQuestions)); // deep copy
+    shuffleArray(qs); // shuffle question order (MCQs only)
+
+    qs.forEach((q, idx) => {
+      shuffleArray(q.options); // shuffle options
+      const qDiv = document.createElement('div');
+      qDiv.className = 'question';
+      qDiv.id = 'q' + q.id;
+
+      const header = document.createElement('div');
+      header.className = 'q-header';
+      header.innerHTML = `<div class="q-number">${q.id}</div><div class="q-text">${escapeHtml(q.text)}</div>`;
+      qDiv.appendChild(header);
+
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'options';
+
+      q.options.forEach((opt, oi) => {
+        const optId = `q${q.id}_opt${oi}`;
+        const label = document.createElement('label');
+        label.className = 'option-label';
+        label.htmlFor = optId;
+        // include data-correct so scoring can read it
+        label.innerHTML = `<input id="${optId}" type="radio" name="q_${q.id}" value="${escapeHtml(opt.t)}" data-correct="${opt.c}" required> <span>${escapeHtml(opt.t)}</span>`;
+        optionsDiv.appendChild(label);
+      });
+
+      qDiv.appendChild(optionsDiv);
+      container.appendChild(qDiv);
+    });
+  }
+
+  // Collect answers for Q3..Q50 and compute score (score counts only MCQs)
+  function collectAndScore(){
+    let score = 0;
+    const answers = []; // {id: qid, answer: text}
+    for(const q of mcQuestions){
+      const name = `q_${q.id}`;
+      const radios = document.getElementsByName(name);
+      let answered = false;
+      for(const r of radios){
+        if(r.checked){
+          answered = true;
+          answers.push({ id: q.id, answer: r.value });
+          if(r.dataset.correct === "true") score++;
+          break;
+        }
+      }
+      if(!answered){
+        answers.push({ id: q.id, answer: "" });
+      }
+    }
+    return {score, answers};
+  }
+
+  // POST submission to Apps Script
+  async function sendToSheet(payload){
+    if(!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR_WEB_APP_URL_HERE') !== -1){
+      console.warn('SCRIPT_URL not set - skipping POST to Google Sheet.');
+      return {ok:false, message:'No script URL provided.'};
+    }
+    try{
+      const resp = await fetch(SCRIPT_URL, {
+        method:'POST',
+        mode:'cors',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const j = await resp.json();
+      return {ok:true, result:j};
+    }catch(err){
+      console.error('Send error', err);
+      return {ok:false, message: err.message || String(err)};
+    }
+  }
+
+  // ---------------------- FORM HANDLER ----------------------
+  async function handleSubmit(e){
+    e.preventDefault();
+    const form = document.getElementById('testForm');
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return false;
+    }
+
+    // Score MCQs
+    const result = collectAndScore();
+    const score = result.score;
+    const total = mcQuestions.length; // 48
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Build payload
+    const payload = {
+      timestamp: new Date().toISOString(),
+      name: name,
+      email: email,
+      score: score,
+      total: total,
+      answers: result.answers // array of {id, answer} for Q3..Q50
+    };
+
+    // Show final score only
+    alert(`Your score: ${score} / ${total}\n\nThank you for completing the test!`);
+
+    // Send to sheet (best-effort)
+    sendToSheet(payload).then(res=>{
+      if(!res.ok){
+        console.warn('Submission not saved:', res.message);
+      }
+    });
+
+    // Reset form and re-render MCQs (reshuffle)
+    form.reset();
+    // ensure radios cleared
+    form.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+    window.scrollTo({top:0, behavior:'smooth'});
+    renderMCQs();
+
+    return false;
+  }
+
+  // Reset on unload (restart behavior)
+  window.addEventListener('beforeunload', function(e){
+    const f = document.getElementById('testForm');
+    if(f) f.reset();
+  });
+
+  // Init
+  renderMCQs();
+  // ensure no radios pre-checked
+  document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+
+  </script>
 </body>
 </html>
