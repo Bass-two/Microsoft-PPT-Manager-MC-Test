@@ -4,46 +4,86 @@
     <meta charset="UTF-8">
     <title>Restart-on-Leave Questionnaire</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f7f7f7; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-        h1 { text-align: center; }
-        label { display: block; margin-top: 15px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background: #f4f4f4; 
+        }
+        .header {
+            background: #107C41; /* Microsoft Forms green */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .container { 
+            max-width: 700px; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            margin-top: 0; 
+            color: #107C41;
+        }
+        label { 
+            display: block; 
+            margin-top: 20px; 
+            font-weight: 500; 
+        }
         input, textarea, select {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 4px;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 6px;
             border: 1px solid #ccc;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #107C41;
+            outline: none;
         }
         button {
-            margin-top: 20px;
-            padding: 10px 15px;
-            background: #0078d4;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #107C41;
             color: white;
+            font-size: 1rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
         }
-        button:hover { background: #005a9e; }
+        button:hover { 
+            background: #0e6b39; 
+        }
+        .note {
+            font-size: 0.9rem; 
+            color: #666; 
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
+<div class="header">Quick Survey</div>
+
 <div class="container">
-    <h1>Quick Survey</h1>
-    <p><strong>Note:</strong> If you leave or refresh this page, you will have to start again.</p>
+    <p class="note"><strong>Note:</strong> If you leave or refresh this page, you will have to start again.</p>
 
     <form id="questionnaire" onsubmit="submitForm(event)">
         <label>Name:
-            <input type="text" name="name" required>
+            <input type="text" name="name" placeholder="Enter your name" required>
         </label>
 
         <label>Email:
-            <input type="email" name="email" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
         </label>
 
         <label>What is your favorite hobby?
-            <textarea name="hobby" required></textarea>
+            <textarea name="hobby" placeholder="Type your answer here" required></textarea>
         </label>
 
         <label>Choose your experience level:
