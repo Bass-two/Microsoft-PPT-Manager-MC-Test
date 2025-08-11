@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Datamaker MS-Word Multiple Choice Test</title>
+<title>Datamaker MS-PowerPoint Multiple Choice Test</title>
 <style>
   :root{ --accent:#107C41; --bg:#f4f4f4; --card:#fff; --muted:#666; --maxw:980px; }
   body{ margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; background:var(--bg); color:#111; }
@@ -33,7 +33,8 @@
 </style>
 </head>
 <body>
-  <div class="topbar">Datamaker MS-Word Multiple Choice Test</div>
+  <div class="topbar">Datamaker MS-PowerPoint Multiple Choice Test</div>
+
   <div class="wrap">
     <div class="card">
       <p class="intro">
@@ -42,6 +43,7 @@
       </p>
 
       <form id="quizForm" autocomplete="off">
+
         <!-- Q1 & Q2 fixed -->
         <div class="meta">
           <div class="field">
@@ -56,6 +58,7 @@
 
         <hr class="sep" />
 
+        <!-- Container for MCQs Q3..Q52 (shuffled) -->
         <div id="questionsContainer"></div>
 
         <div class="submit-row">
@@ -65,327 +68,329 @@
 
         <div id="result"></div>
         <p class="note">This content is neither created nor endorsed by Microsoft. The data you submit will be sent to the form owner.</p>
+
       </form>
     </div>
   </div>
 
 <script>
 /* ---------------- CONFIG ---------------- */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx27nvFJGoz2eiYMZ76eJXPjdBYdGqWksQX7lg_3pUMmlUZSbLhWL53SzHYk_nl5ec5Iw/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZBG7K-2EgDy9orsUkzjlug-0Rl8ubjqktFErdCUIRSEkTUw8UFP94iNG78qslMX3I/exec";
 
-/* ---------------- QUESTIONS (Q3..Q52) ----------------
-   Format: { id, text, options: [ {t: "option text", c: true/false}, ... ] }
-*/
+/* ---------------- QUESTIONS ---------------- */
 const mcQuestions = [
-  { id:3, text:"What is Microsoft Word?", options:[
-      {t:"A web browser", c:false},
+  { id:3, text:"What is Microsoft PowerPoint?", options:[
       {t:"A spreadsheet application", c:false},
-      {t:"A word processing software", c:true},
-      {t:"A video editing software", c:false}
+      {t:"A presentation software", c:true},
+      {t:"A word processing software", c:false},
+      {t:"An email client", c:false}
   ]},
-  { id:4, text:"Which ribbon tab in Microsoft Word is used for formatting text?", options:[
+  { id:4, text:"Which of the following is not a slide layout option in PowerPoint?", options:[
+      {t:"Title Slide", c:false},
+      {t:"Comparison Slide", c:false},
+      {t:"Equation Slide", c:true},
+      {t:"Blank Slide", c:false}
+  ]},
+  { id:5, text:"What is the shortcut key to create a new slide in PowerPoint?", options:[
+      {t:"Ctrl + N", c:false},
+      {t:"Ctrl + S", c:false},
+      {t:"Ctrl + M", c:true},
+      {t:"Ctrl + P", c:false}
+  ]},
+  { id:6, text:"Which of the following is not a view option in PowerPoint?", options:[
+      {t:"Normal View", c:false},
+      {t:"Slide Show view", c:false},
+      {t:"Outline View", c:false},
+      {t:"Document View", c:true},
+      {t:"All of the above", c:false},
+      {t:"None of the above", c:false}
+  ]},
+  { id:7, text:"Which tab on the Ribbon contains the Themes and Variants options?", options:[
+      {t:"Home", c:false},
+      {t:"Insert", c:false},
+      {t:"Design", c:true},
+      {t:"View", c:false}
+  ]},
+  { id:8, text:"What is the purpose of the 'Slide Master' in PowerPoint?", options:[
+      {t:"To add animation effects to a slide", c:false},
+      {t:"To create a new slide", c:false},
+      {t:"To apply consistent formatting to all slides", c:true},
+      {t:"To add notes to a slide", c:false}
+  ]},
+  { id:9, text:"Which of the following is not a way to add a new slide to a PowerPoint presentation?", options:[
+      {t:"Clicking the 'New Slide' button on the Ribbon", c:false},
+      {t:"Pressing Ctrl + M on the keyboard", c:false},
+      {t:"Right-clicking on a slide and selecting 'New Slide'", c:false},
+      {t:"Clicking the 'Save' button on the Ribbon", c:true},
+      {t:"All of the above", c:false}
+  ]},
+  { id:10, text:"Which of the following is not a multimedia element that can be added to a slide in PowerPoint?", options:[
+      {t:"Video", c:false},
+      {t:"Audio", c:false},
+      {t:"Image", c:false},
+      {t:"Spreadsheet", c:true},
+      {t:"All of the above", c:false}
+  ]},
+  { id:11, text:"What is the purpose of the 'Transitions' tab in PowerPoint?", options:[
+      {t:"To apply animation effects to objects on a slide", c:false},
+      {t:"To add multimedia content to a slide", c:false},
+      {t:"To add speaker notes to a slide", c:false},
+      {t:"To apply visual effects between slides", c:true}
+  ]},
+  { id:12, text:"What is the purpose of the 'Animation' tab in PowerPoint?", options:[
+      {t:"To add multimedia content to a slide", c:false},
+      {t:"To apply visual effects between slides", c:false},
+      {t:"To apply animation effects to objects on a slide", c:true},
+      {t:"To insert speaker notes in a slide", c:false}
+  ]},
+  { id:13, text:"What is the purpose of the 'Presenter View' in PowerPoint?", options:[
+      {t:"To preview the presentation as it will appear to the audience", c:false},
+      {t:"To view the presentation on a different monitor while controlling it from the primary monitor", c:true},
+      {t:"To edit the presentation in a split-screen view", c:false},
+      {t:"To add multimedia content to a slide", c:false}
+  ]},
+  { id:14, text:"Which tab on the Ribbon contains the 'Slide Size' option?", options:[
+      {t:"Home", c:false},
+      {t:"Insert", c:false},
+      {t:"Design", c:true},
+      {t:"View", c:false}
+  ]},
+  { id:15, text:"What is Microsoft PowerPoint used for?", options:[
+      {t:"Creating and editing text documents", c:false},
+      {t:"Creating and editing presentations", c:true},
+      {t:"Creating and editing spreadsheets", c:false},
+      {t:"Creating and editing graphics", c:false}
+  ]},
+  { id:16, text:"What is the default slide layout in Microsoft PowerPoint?", options:[
+      {t:"Title Slide", c:false},
+      {t:"Title and Content", c:true},
+      {t:"Two Content", c:false},
+      {t:"Blank", c:false}
+  ]},
+  { id:17, text:"Which tab on the Ribbon contains the Slide Layouts?", options:[
       {t:"Home", c:true},
       {t:"Insert", c:false},
-      {t:"Page Layout", c:false},
-      {t:"Review", c:false}
+      {t:"Design", c:false},
+      {t:"Transitions", c:false}
   ]},
-  { id:5, text:"Which keyboard shortcut is used to bold text in Microsoft Word?", options:[
-      {t:"Ctrl + I", c:false},
+  { id:18, text:"What is the purpose of the 'Format Painter' in Microsoft PowerPoint?", options:[
+      {t:"It allows you to copy and paste text formatting from one place to another.", c:true},
+      {t:"It allows you to change the font size of your text.", c:false},
+      {t:"It allows you to apply animations to your text.", c:false},
+      {t:"It allows you to add multimedia elements to your text.", c:false}
+  ]},
+  { id:19, text:"What is the shortcut key to make text bold in Microsoft PowerPoint?", options:[
       {t:"Ctrl + U", c:false},
-      {t:"Ctrl + P", c:false},
-      {t:"Ctrl + B", c:true}
+      {t:"Ctrl + I", c:false},
+      {t:"Ctrl + B", c:true},
+      {t:"Ctrl + K", c:false},
+      {t:"None of the above", c:false}
   ]},
-  { id:6, text:"Which option in Microsoft Word is used to save a document?", options:[
-      {t:"Save and Close", c:false},
-      {t:"Save and Send", c:false},
-      {t:"Save As", c:true},
-      {t:"Save and Publish", c:false}
-  ]},
-  { id:7, text:"Which feature in Microsoft Word is used to check spelling and grammar errors?", options:[
-      {t:"AutoCorrect", c:false},
-      {t:"AutoSummarize", c:false},
-      {t:"Word Count", c:false},
-      {t:"Spelling and Grammar", c:true}
-  ]},
-  { id:8, text:"Which ribbon tab in Microsoft Word is used for adding tables?", options:[
-      {t:"Home", c:false},
-      {t:"Insert", c:true},
-      {t:"Page Layout", c:false},
-      {t:"Review", c:false}
-  ]},
-  { id:9, text:"Which keyboard shortcut is used to undo the last action in Microsoft Word?", options:[
-      {t:"Ctrl + Z", c:true},
-      {t:"Ctrl + Y", c:false},
-      {t:"Ctrl + X", c:false},
-      {t:"Ctrl + C", c:false}
-  ]},
-  { id:10, text:"We can insert a page number at?", options:[
-      {t:"Header", c:false},
-      {t:"Footer", c:false},
-      {t:"None", c:false},
-      {t:"Both A an B", c:true}
-  ]},
-  { id:11, text:"Which ribbon tab in Microsoft Word is used for adding page numbers?", options:[
-      {t:"Home", c:false},
-      {t:"Insert", c:true},
-      {t:"Page Layout", c:false},
-      {t:"Review", c:false}
-  ]},
-  { id:12, text:"Which keyboard shortcut is used to align text to the center in Microsoft Word?", options:[
-      {t:"Ctrl + L", c:false},
-      {t:"Ctrl + R", c:false},
-      {t:"Ctrl + E", c:true},
-      {t:"Ctrl + J", c:false}
-  ]},
-  { id:13, text:"Which of the following keyboard shortcuts is used to save a Microsoft Word document?", options:[
-      {t:"Ctrl + A", c:false},
-      {t:"Ctrl + S", c:true},
-      {t:"Ctrl + C", c:false},
-      {t:"Ctrl + V", c:false}
-  ]},
-  { id:14, text:"Which of the following is not a type of page orientation in Microsoft Word?", options:[
-      {t:"Portrait", c:false},
-      {t:"Square", c:true},
-      {t:"Mirror", c:false},
-      {t:"Landscape", c:false}
-  ]},
-  { id:15, text:"Which of the following is not a type of page break in Microsoft Word?", options:[
-      {t:"Next Page", c:false},
-      {t:"Continuous", c:false},
-      {t:"Column", c:false},
-      {t:"Section Break", c:true}
-  ]},
-  { id:16, text:"Which of the following is not a type of alignment in Microsoft Word?", options:[
-      {t:"Left", c:false},
-      {t:"Right", c:false},
-      {t:"Center", c:false},
-      {t:"Justified", c:false},
-      {t:"Hanging", c:true}
-  ]},
-  { id:17, text:"Which of the following is not part of the type of list?", options:[
-      {t:"Bulleted List", c:false},
-      {t:"Single-level List", c:true},
-      {t:"Numbered List", c:false},
-      {t:"Multilevel List", c:false}
-  ]},
-  { id:18, text:"The Space left between the margin and the start of a paragraph is called", options:[
-      {t:"Spacing", c:false},
-      {t:"Gutter", c:false},
-      {t:"Indentation", c:true},
-      {t:"Alignment", c:false}
-  ]},
-  { id:19, text:"What does the acronym WYSIWYG stand for in relation to Microsoft Word?", options:[
-      {t:"What You Send Is What You Get", c:false},
-      {t:"What You Set Is What You Gain", c:false},
-      {t:"What You See Is What You Get", c:true},
-      {t:"What You Save Is What You Generate", c:false}
-  ]},
-  { id:20, text:"Which ribbon tab is used to change the font style, size, and color in Microsoft Word?", options:[
-      {t:"Review", c:false},
+  { id:20, text:"Which tab on the Ribbon contains the 'Font' options in Microsoft PowerPoint?", options:[
+      {t:"Home", c:true},
       {t:"Insert", c:false},
-      {t:"Page Layout", c:false},
-      {t:"Home", c:true}
+      {t:"Design", c:false},
+      {t:"Transitions", c:false},
+      {t:"Edit", c:false}
   ]},
-  { id:21, text:"In which view of MS Word are headers and footers visible?", options:[
-      {t:"Normal View", c:false},
-      {t:"Print Layout View", c:true},
-      {t:"Page Layout View", c:false},
-      {t:"Draft View", c:false}
+  { id:21, text:"What is the purpose of the 'Slide Master' in Microsoft PowerPoint?", options:[
+      {t:"It allows you to create custom slide layouts.", c:true},
+      {t:"It allows you to add multimedia elements to your slides.", c:false},
+      {t:"It allows you to create custom animations.", c:false},
+      {t:"It allows you to add comments to your slides", c:false}
   ]},
-  { id:22, text:"Text-Styling feature in MS Word is known as", options:[
-      {t:"WordArt", c:true},
-      {t:"WordColour", c:false},
-      {t:"WordFont", c:false},
-      {t:"WordFill", c:false}
+  { id:22, text:"Which file format can be added to a power point show?", options:[
+      {t:".gif", c:false},
+      {t:".png", c:false},
+      {t:".wav", c:false},
+      {t:".mp4", c:false},
+      {t:"All of the Above", c:true}
   ]},
-  { id:23, text:"Which of the following MS-Word features crosses texts out by drawing a line through it?", options:[
-      {t:"Pagination", c:false},
-      {t:"Underline", c:false},
-      {t:"Strikethrough", c:true},
-      {t:"Subscript", c:false},
+  { id:23, text:"Special effects used to introduce slides in a presentation are known as?", options:[
+      {t:"Transitions", c:true},
+      {t:"Effects", c:false},
+      {t:"Animations", c:false},
+      {t:"Annotations", c:false}
+  ]},
+  { id:24, text:"Slide sorter can be accessed from which menu?", options:[
+      {t:"Edit", c:false},
+      {t:"View", c:true},
+      {t:"File", c:false},
+      {t:"Insert", c:false}
+  ]},
+  { id:25, text:"To print power point presentation, press:", options:[
+      {t:"Ctrl+P", c:true},
+      {t:"Ctrl+S", c:false},
+      {t:"Ctrl+Shift+P", c:false},
+      {t:"Ctrl+A", c:false}
+  ]},
+  { id:26, text:"To edit a chart, we can", options:[
+      {t:"Click and drag the chart object", c:false},
+      {t:"Double click the chart object", c:true},
+      {t:"Triple click the chart object", c:false},
+      {t:"Click the chart object", c:false}
+  ]},
+  { id:27, text:"What is the best way to create another copy of a slide?", options:[
+      {t:"Click the slide then press Ctrl+A and paste in new slide", c:false},
+      {t:"From Insert Menu choose Duplicate Slide", c:true},
+      {t:"Redo everything on a new slide that you had done on previous slide", c:false},
+      {t:"None of above", c:false}
+  ]},
+  { id:28, text:"If you select Insert >> Picture >> From File", options:[
+      {t:"You can insert pictures and clipArts", c:true},
+      {t:"You can insert clipArts only", c:false},
+      {t:"You can insert pictures only", c:false},
+      {t:"You can insert pictures and icons", c:false},
       {t:"None of the above", c:false}
   ]},
-  { id:24, text:"When opening a new document in Microsoft Word, the default font size is?", options:[
-      {t:"10 point", c:false},
-      {t:"12 point", c:false},
-      {t:"16 point", c:false},
-      {t:"11 point", c:true}
+  { id:29, text:"What is the easiest way to place same graphic in same place in all slides", options:[
+      {t:"Place graphic in Notes Master", c:false},
+      {t:"Place graphic in Slide Master", c:true},
+      {t:"Place graphic in Handout Master", c:false},
+      {t:"Place graphic manually in all slide", c:false}
   ]},
-  { id:25, text:"What is the default font style in MS Word?", options:[
-      {t:"Calibri", c:true},
-      {t:"Times New Roman", c:false},
-      {t:"Arial", c:false},
-      {t:"Malgun Gothic", c:false}
+  { id:30, text:"What is the use of Notes in slides?", options:[
+      {t:"It will be displays at the time of Slide Presentation", c:true},
+      {t:"This is just Note about the slide", c:false},
+      {t:"This is just for printing purpose only", c:false},
+      {t:"Notes cannot be inserted in Slides", c:false}
   ]},
-  { id:26, text:"What is shortcut key to open the 'Font' Dialogue box in MS-Word?", options:[
-      {t:"Alt+F", c:false},
-      {t:"Ctrl+D", c:true},
-      {t:"Ctrl+F", c:false},
-      {t:"Alt+Ctrl+D", c:false}
-  ]},
-  { id:27, text:"In MS Word, a character that is raised and is smaller above the baseline is known as", options:[
-      {t:"Superscript", c:true},
-      {t:"Raised", c:false},
-      {t:"Outlined", c:false},
-      {t:"Subscript", c:false}
-  ]},
-  { id:28, text:"The valid format for saving of a MS Word document is", options:[
-      {t:".jpeg", c:false},
-      {t:".doc", c:true},
-      {t:".pdf", c:false},
-      {t:".txt", c:false},
-      {t:".pptx", c:false}
-  ]},
-  { id:29, text:"What do you call the distance between the written text and the edge of a paper?", options:[
-      {t:"Alignment", c:false},
-      {t:"Ruler line", c:false},
-      {t:"Indent Stop", c:false},
-      {t:"Margin", c:true}
-  ]},
-  { id:30, text:"…. are the blank spaces found at line the top, bottom, left, and, right sides a document", options:[
-      {t:"Spacings", c:false},
-      {t:"Margins", c:true},
-      {t:"Indentations", c:false},
-      {t:"Alignments", c:false}
-  ]},
-  { id:31, text:"All the following are shortcuts for alignments except?", options:[
-      {t:"Ctrl+D", c:true},
-      {t:"Ctrl+L", c:false},
-      {t:"Ctrl+E", c:false},
-      {t:"Ctrl+R", c:false},
-      {t:"Ctrl+J", c:false},
+  { id:31, text:"To edit an already inserted embedded organization chart object by", options:[
+      {t:"SHIFT + Click on the organization chart object", c:false},
+      {t:"Double Click on the organization chart object", c:true},
+      {t:"CTRL + Click on the organization chart object", c:false},
+      {t:"All of the Above", c:false},
       {t:"None of the above", c:false}
   ]},
-  { id:32, text:"What is the shortcut to increase the font size of a text by 1 point?", options:[
-      {t:"Ctrl+]", c:true},
-      {t:"Ctrl+[", c:false},
-      {t:"Ctrl+1", c:false},
-      {t:"Ctrl+I", c:false}
+  { id:32, text:"Which is the menu to create a text box on a slide?", options:[
+      {t:"View -> Text Box", c:false},
+      {t:"Tools -> Text Box", c:false},
+      {t:"Insert -> Text Box", c:true},
+      {t:"Format -> Text Box", c:false},
+      {t:"Design -> Text Box", c:false}
   ]},
-  { id:33, text:"What is the shortcut to decrease the font size of a text by 1 point?", options:[
-      {t:"Ctrl+1", c:false},
-      {t:"Ctrl+]", c:false},
-      {t:"Ctrl+I", c:false},
-      {t:"Ctrl+[", c:true},
-      {t:"Ctrl+Y", c:false}
+  { id:33, text:"Which PowerPoint view works best for adding slide transitions?", options:[
+      {t:"Slide show view", c:false},
+      {t:"Slide sorter view", c:true},
+      {t:"Slide view", c:false},
+      {t:"Notes view", c:false}
   ]},
-  { id:34, text:"What is the shortcut for cutting a text in MS-Word?", options:[
-      {t:"Ctrl+C", c:false},
-      {t:"Ctrl+X", c:true},
-      {t:"Ctrl+V", c:false},
-      {t:"Ctrl+Z", c:false},
-      {t:"Ctrl+K", c:false}
+  { id:34, text:"What lets you to create new presentation by selecting ready-made font color and graphics effects?", options:[
+      {t:"Presentation Template", c:false},
+      {t:"Master Slide", c:false},
+      {t:"Design Template", c:true},
+      {t:"Animation Scheme", c:false}
   ]},
-  { id:35, text:"Which of the following is not a type of document view in Microsoft Word?", options:[
-      {t:"Draft", c:false},
-      {t:"Print Layout", c:false},
-      {t:"Web Layout", c:false},
-      {t:"Handwriting", c:true}
-  ]},
-  { id:36, text:"Which Toolbar is located directly next to the Microsoft Office Button?", options:[
-      {t:"Title Bar", c:false},
-      {t:"Ribbon", c:false},
-      {t:"Search toolbar", c:false},
-      {t:"Quick Access Toolbar", c:true}
-  ]},
-  { id:37, text:"Which Bar shows the document's or application name when it is opened in MS Word?", options:[
-      {t:"Quick Access Toolbar", c:false},
-      {t:"Title Bar", c:true},
-      {t:"Home tab", c:false},
-      {t:"Ribbon", c:false}
-  ]},
-  { id:38, text:"The number of tabs in the ribbon of Microsoft Word depends on the version of Word and the screen resolution of your device. However, in most recent versions of Word (such as Word 2019 or Word 365) there are typically 8 or 9 tabs in the ribbon.", options:[
-      {t:"True", c:true},
-      {t:"False", c:false}
-  ]},
-  { id:39, text:"There are several ways to save a Microsoft Word document, these includes all of the following except?", options:[
-      {t:"Click the \"Save\" button on the Quick Access Toolbar", c:false},
-      {t:"Click the \"File\" tab in the ribbon, then click \"Save\" or \"Save As\". If you choose \"Save As\", you can select a new location and/or file name for the document.", c:false},
-      {t:"If you are using the online version of MS-Word, you can type the name on the title bar and save", c:true},
-      {t:"Press the \"Ctrl\" + \"S\" shortcut keys.", c:false},
-      {t:"Press the \"Ctrl\" + \"Shift\" + \"S\" shortcut keys.", c:false}
-  ]},
-  { id:40, text:"Which of the following procedures helps you to save a word document as a pdf?", options:[
-      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Save As\". In the \"Save As\" dialog box, choose the location where you want to save the PDF file. Select \"PDF (*.pdf)\" from the \"Save as type\" drop-down menu. Click the \"Save\" button.", c:false},
-      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Print\" from the list on the left side of the screen. Choose \"Microsoft Print to PDF\" from the list of printers. Click the \"Print\" button. In the \"Save Print Output As\" dialog box, choose the location where you want to save the PDF file. Enter a file name for the PDF file. Click the \"Save\" button.", c:false},
-      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Export\" from the list on the left side of the screen. Choose \"Create PDF/XPS Document\" and click the \"Create PDF/XPS\" button. In the \"Publish as PDF or XPS\" dialog box, choose the location where you want to save the PDF file. Click the \"Publish\" button.", c:false},
-      {t:"All of the above", c:true}
-  ]},
-  { id:41, text:"Which of the following is used to change text colour in an MS Word document?", options:[
-      {t:"Font color", c:false},
-      {t:"Text highlight colour", c:false},
-      {t:"Shading", c:false},
-      {t:"Styles", c:false},
+  { id:35, text:"Shortcut key to insert a hyperlink in a slide", options:[
+      {t:"Ctrl + H", c:false},
+      {t:"Ctrl + K", c:true},
+      {t:"Hyperlinks can’t be inserted in slides", c:false},
       {t:"None of the above", c:false},
-      {t:"All of the above", c:true}
+      {t:"Ctrl+ L", c:false}
   ]},
-  { id:42, text:"What is the purpose of sharing a Word document with others?", options:[
-      {t:"To show off your writing skills", c:false},
-      {t:"To make a backup copy of the document", c:false},
-      {t:"To collaborate and work on the same document together", c:true},
-      {t:"To keep the document private", c:false}
+  { id:36, text:"You have got a bunch of digital holiday photo you want to put into a slide show. What the quickest method?", options:[
+      {t:"Apply a multiple-picture layout to several slides, and use the clipart icon on the slides to import your picture", c:false},
+      {t:"On the insert menu, point to the picture, click from file, and select your picture in a group for each slide", c:false},
+      {t:"On the insert menu, point the picture and click new photo album", c:true},
+      {t:"All of the Above", c:false}
   ]},
-  { id:43, text:"Which feature in Microsoft Word allows you to share a document with others via email or cloud storage?", options:[
-      {t:"Save As", c:false},
-      {t:"Track Changes", c:false},
-      {t:"Comments", c:false},
-      {t:"Share", c:true}
+  { id:37, text:"What are symbols used to identify items in a list?", options:[
+      {t:"Icons", c:false},
+      {t:"Markers", c:false},
+      {t:"Bullets", c:true},
+      {t:"Graphics", c:false}
   ]},
-  { id:44, text:"What is the benefit of saving a Word document to a cloud storage service like OneDrive or SharePoint?", options:[
-      {t:"It automatically backs up the document to a local hard drive", c:false},
-      {t:"It allows you to access and edit the document from anywhere with an internet connection", c:true},
-      {t:"It improves the formatting and layout of the document", c:false},
-      {t:"It helps you to prevent people from editing your document", c:false}
+  { id:38, text:"In Normal view, this tab displays the content of each slide.", options:[
+      {t:"Slides", c:false},
+      {t:"View", c:false},
+      {t:"Sort", c:false},
+      {t:"Outline", c:true}
   ]},
-  { id:45, text:"Which option in the Spelling and Grammar dialog box in Microsoft Word allows you to add a word to the dictionary?", options:[
-      {t:"Add to Dictionary", c:true},
-      {t:"Add", c:false},
-      {t:"Ignore", c:false},
-      {t:"Add to Thesaurus", c:false}
+  { id:39, text:"To insert slide numbers", options:[
+      {t:"Insert a text box and select Insert >> Page Number", c:false},
+      {t:"Insert a textbox and select Insert >> Number >> Page Number", c:false},
+      {t:"Choose Insert >> Slide Number", c:true},
+      {t:"Insert a new text box and select Insert >> slide Number", c:false}
   ]},
-  { id:46, text:"Which of the following is a proofreading technique that involves reading a document backwards, starting from the last sentence and working your way to the beginning?", options:[
-      {t:"Chunking", c:false},
-      {t:"Scanning", c:false},
-      {t:"Skimming", c:false},
-      {t:"Reverse Reading", c:true}
+  { id:40, text:"To save a presentation you", options:[
+      {t:"Click save on the windows start button", c:false},
+      {t:"Press Ctrl + F5", c:false},
+      {t:"Select File, Save from the menu", c:true},
+      {t:"Click the saver button on the formatting toolbar", c:false}
   ]},
-  { id:47, text:"Which of the following is a proofreading technique that involves reading a document aloud to check for errors and inconsistencies?", options:[
-      {t:"Reading Out Loud", c:true},
-      {t:"Reciting", c:false},
-      {t:"Reading Loud", c:false},
-      {t:"Grammar Checker", c:false}
+  { id:41, text:"The arrangement of elements such as Title and Subtitle text, pictures, tables etc is called", options:[
+      {t:"Layout", c:true},
+      {t:"Presentation", c:false},
+      {t:"Design", c:false},
+      {t:"Scheme", c:false}
   ]},
-  { id:48, text:"Which option in the Spelling and Grammar dialog box in Microsoft Word allows you to automatically correct a spelling or grammar error in a document?", options:[
-      {t:"AutoRight", c:false},
-      {t:"Ignore All", c:false},
-      {t:"AutoCorrect", c:true},
-      {t:"Change", c:false},
-      {t:"None Above", c:false}
+  { id:42, text:"The boxes that are displayed to indicate that the text, pictures or objects are placed in it is called", options:[
+      {t:"Auto text", c:false},
+      {t:"Placeholder", c:true},
+      {t:"Text box", c:false},
+      {t:"Word art", c:false}
   ]},
-  { id:49, text:"Which of the following is a proofreading technique that involves reading a document quickly to get an overall sense of its content?", options:[
-      {t:"Skimming", c:true},
-      {t:"Scanning", c:false},
-      {t:"Chunking", c:false},
-      {t:"AutoCorrect", c:false}
+  { id:43, text:"To give a PowerPoint presentation to a large audience, you:", options:[
+      {t:"Set up your computer in a large auditorium, and click large, auditorium, OK", c:false},
+      {t:"Click the slide you wish the audience to see in normal view, then click the next slide, and so on", c:false},
+      {t:"Choose either view, slide show or slide show, view", c:true},
+      {t:"Slick slide show, OK", c:false}
   ]},
-  { id:50, text:"What is the purpose of the Review tab in Microsoft Word?", options:[
-      {t:"To access sharing and collaboration features", c:false},
-      {t:"To format text and paragraphs in a document", c:false},
-      {t:"To add headers and footers to a document", c:false},
-      {t:"To track changes and add comments to a document", c:true}
+  { id:44, text:"What is to be use to add text in Slide?", options:[
+      {t:"Comment Box", c:false},
+      {t:"Text Layer", c:false},
+      {t:"Note Box", c:false},
+      {t:"Text Box", c:true}
   ]},
-  { id:51, text:"What is the purpose of co-authoring in Microsoft Word?", options:[
-      {t:"To save a document in a different file format", c:false},
-      {t:"To track changes made by different users in the same document", c:false},
-      {t:"To allow multiple users to work on the same document simultaneously", c:true},
-      {t:"To help you type well", c:false},
-      {t:"None Above", c:false}
+  { id:45, text:"How to insert Tables in Slide?", options:[
+      {t:"Insert Table from Insert menu", c:false},
+      {t:"Click on Insert Table in content pane of blank slide", c:false},
+      {t:"Option A & B above", c:true},
+      {t:"Tables cannot be inserted in slides", c:false}
   ]},
-  { id:52, text:"Which shortcut command is used to select all typed words in a document?", options:[
-      {t:"Ctrl + A", c:true},
-      {t:"Ctrl + C", c:false},
-      {t:"Ctrl + D", c:false},
-      {t:"Ctrl + U", c:false}
+  { id:46, text:"Which tab is not available on left panel when you open a presentation?", options:[
+      {t:"Task Pane", c:false},
+      {t:"Task Bar", c:true},
+      {t:"Control Panel", c:false},
+      {t:"Notes", c:false},
+      {t:"None of the above", c:false}
+  ]},
+  { id:47, text:"You can create a new presentation by completing all of the following except", options:[
+      {t:"Clicking the new button on the standard toolbar", c:false},
+      {t:"Clicking file, new", c:false},
+      {t:"Pressing Ctrl+N", c:false},
+      {t:"Clicking file open", c:true}
+  ]},
+  { id:48, text:"What is the term used when you press and hold the left mouse key and move the mouse around the slide?", options:[
+      {t:"Moving", c:false},
+      {t:"Dragging", c:true},
+      {t:"Monitoring", c:false},
+      {t:"Highlighting", c:false}
+  ]},
+  { id:49, text:"What term describes a background that appears as a grainy, non-smooth surface?", options:[
+      {t:"Pattern", c:false},
+      {t:"Gradient", c:false},
+      {t:"Velvet", c:false},
+      {t:"Texture", c:true}
+  ]},
+  { id:50, text:"Which option can be used to set custom timings for slides in a presentation?", options:[
+      {t:"Slider Timings", c:false},
+      {t:"Slider Timer", c:false},
+      {t:"Rehearsal", c:true},
+      {t:"Slide Show Setup", c:false}
+  ]},
+  { id:51, text:"How can we stop a slide show?", options:[
+      {t:"Press the right arrow", c:false},
+      {t:"Press Ctrl+A", c:false},
+      {t:"Press Escape", c:true},
+      {t:"Press Ctrl+S", c:false}
+  ]},
+  { id:52, text:"Power point can display data from which of the following add-in software of MS office", options:[
+      {t:"Organization Chart", c:false},
+      {t:"Photo Album", c:false},
+      {t:"Equation Editor", c:false},
+      {t:"All of above", c:true},
+      {t:"None of Above", c:false}
   ]}
 ];
 
@@ -403,11 +408,9 @@ function shuffleArray(arr){
 }
 
 /* ---------------- RENDER ---------------- */
-let shuffledQuestions = []; // will hold the shuffled mcQuestions (order used for scoring too)
+let shuffledQuestions = [];
 document.addEventListener('DOMContentLoaded', () => {
-  // deep copy and shuffle
   shuffledQuestions = shuffleArray(JSON.parse(JSON.stringify(mcQuestions)));
-
   const container = document.getElementById('questionsContainer');
   container.innerHTML = '';
 
@@ -442,15 +445,10 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('quizForm').addEventListener('submit', async function(e){
   e.preventDefault();
 
-  // ensure form fields
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  if(!name || !email){
-    alert('Please enter name and email.');
-    return;
-  }
+  if(!name || !email){ alert('Please enter name and email.'); return; }
 
-  // collect answers and check completeness
   const answers = [];
   let allAnswered = true;
   for(const q of shuffledQuestions){
@@ -461,10 +459,9 @@ document.getElementById('quizForm').addEventListener('submit', async function(e)
   }
 
   if(!allAnswered){
-    if(!confirm('Some questions are unanswered. Do you want to submit anyway?')) return;
+    if(!confirm('Some questions are unanswered. Submit anyway?')) return;
   }
 
-  // scoring
   let score = 0;
   for(const q of shuffledQuestions){
     const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
@@ -473,37 +470,31 @@ document.getElementById('quizForm').addEventListener('submit', async function(e)
     if(correct && ansText === correct.t) score++;
   }
 
-  // show result to participant
-  const resultDiv = document.getElementById('result');
-  resultDiv.textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
+  document.getElementById('result').textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
 
-  // payload for Apps Script
   const payload = {
     timestamp: new Date().toISOString(),
-    name: name,
-    email: email,
-    score: score,
+    name,
+    email,
+    score,
     total: shuffledQuestions.length,
-    answers: answers
+    answers
   };
 
-  // send (best-effort)
   try {
     await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify(payload)
     });
-    // disable inputs to prevent re-submit
+    // disable inputs to avoid resubmission
     document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
   } catch(err){
-    console.warn('Submit error:', err);
+    console.warn('Submission error', err);
     // still disable inputs
     document.querySelectorAll('#quizForm input, #quizForm button').forEach(el => el.disabled = true);
   }
 });
-
-/* Reset on refresh/unload is default — form not persisted */
 </script>
 </body>
 </html>
