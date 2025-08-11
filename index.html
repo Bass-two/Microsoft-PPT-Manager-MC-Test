@@ -187,306 +187,57 @@
 
   // Q3..Q52 (50 MCQs)
   const mcQuestions = [
-    { id: 3, text: "What is the keyboard shortcut to open the Filter menu in Excel?", options: [
-        {t:"CTRL + F", c:false},
-        {t:"CTRL + L", c:false},
-        {t:"CTRL + SHIFT + L", c:true},
-        {t:"ALT + D + F + F", c:false}
-      ]},
-    { id: 4, text: "Which of the following filtering options is NOT available in the Excel AutoFilter menu?", options: [
-        {t:"Text Filters", c:false},
-        {t:"Color Filters", c:false},
-        {t:"Value Filters", c:false},
-        {t:"Formula Filters", c:true}
-      ]},
-    { id: 5, text: "When sorting data in Excel, what happens if multiple columns are selected before sorting?", options: [
-        {t:"Only the first column will be sorted", c:false},
-        {t:"Excel sorts each column independently", c:false},
-        {t:"Excel asks for a sorting priority", c:false},
-        {t:"Excel sorts the selected data as a whole", c:true}
-      ]},
-    { id: 6, text: "How do you apply a custom sort where \"High Priority\" appears first, followed by \"Medium Priority,\" then \"Low Priority\"?", options: [
-        {t:"Use an ascending alphabetical sort", c:false},
-        {t:"Apply a value filter", c:false},
-        {t:"Use a custom sort list in the Sort dialog box", c:true},
-        {t:"Use the Filter function", c:false}
-      ]},
-    { id: 7, text: "Which function allows filtering data dynamically in Excel?", options: [
-        {t:"SORT()", c:false},
-        {t:"FILTER()", c:true},
-        {t:"SORTBY()", c:false},
-        {t:"UNIQUE()", c:false}
-      ]},
-    { id: 8, text: "What is the result of =TEXTJOIN(\",\",TRUE,\"Apple\",\"\",\"Banana\",\"Grape\")?", options: [
-        {t:"Apple,Banana,Grape", c:true},
-        {t:"Apple,,Banana,Grape", c:false},
-        {t:"Apple Banana Grape", c:false},
-        {t:"Apple,Banana,Grape,", c:false}
-      ]},
-    { id: 9, text: "If A1 contains \"Excel 2025 Guide\", what does =TEXTBEFORE(A1,\" \") return?", options: [
-        {t:"Excel", c:true},
-        {t:"Excel 2025", c:false},
-        {t:"2025 Guide", c:false},
-        {t:"Guide", c:false}
-      ]},
-    { id: 10, text: "What does =TEXTAFTER(A1,\"2025\") return if A1 contains \"Microsoft Excel 2025 Guide\"?", options: [
-        {t:"Guide", c:true},
-        {t:"Microsoft Excel", c:false},
-        {t:"Excel", c:false},
-        {t:"(none)", c:false}
-      ]},
-    { id: 11, text: "What does =CONCAT(A1:A3) do?", options: [
-        {t:"Joins text from A1, A2, and A3 into one string", c:true},
-        {t:"Returns an array of individual values", c:false},
-        {t:"Inserts commas between each value", c:false},
-        {t:"Only returns A1’s value", c:false}
-      ]},
-    { id: 12, text: "If A1 = \"Data\", A2 = \"Science\", and A3 = \"Excel\", what does =TEXTJOIN(\"- \" ,FALSE,A1:A3) return?", options: [
-        {t:"Data-Science-Excel", c:true},
-        {t:"Data, Science, Excel", c:false},
-        {t:"Data Science Excel", c:false},
-        {t:"Data-Science-Excel-", c:false}
-      ]},
-    { id: 13, text: "What does =IF(A1>10,\"High\",\"Low\") return if A1 contains 8?", options: [
-        {t:"High", c:false},
-        {t:"Low", c:true},
-        {t:"TRUE", c:false},
-        {t:"FALSE", c:false}
-      ]},
-    { id: 14, text: "What function returns \"Pass\" for values greater than 50 and \"Fail\" otherwise?", options: [
-        {t:"=IF(A1>50,\"Pass\",\"Fail\")", c:true},
-        {t:"=IF(A1<50,\"Fail\",\"Pass\")", c:false},
-        {t:"=IF(A1=\"Pass\",\">50\",\"Fail\")", c:false},
-        {t:"=IF(A1>50,\"Fail\",\"Pass\")", c:false}
-      ]},
-    { id: 15, text: "What does =IFS(A1>90,\"A\",A1>80,\"B\",A1>70,\"C\",TRUE,\"F\") return if A1=85?", options: [
-        {t:"A", c:false},
-        {t:"B", c:true},
-        {t:"C", c:false},
-        {t:"F", c:false}
-      ]},
-    { id: 16, text: "What function returns TRUE if A1 contains \"Excel\" anywhere in the text?", options: [
-        {t:"=SEARCH(\"Excel\",A1)>0", c:true},
-        {t:"=IF(A1=\"Excel\",TRUE,FALSE)", c:false},
-        {t:"=IF(SEARCH(\"Excel\",A1),\"TRUE\",\"FALSE\")", c:false},
-        {t:"=FIND(A1,\"Excel\")", c:false}
-      ]},
-    { id: 17, text: "Which function calculates a running total in column B based on values in column A?", options: [
-        {t:"=SUM(A$1:A1)", c:true},
-        {t:"=CUMSUM(A1:A10)", c:false},
-        {t:"=RUNNINGTOTAL(A1:A10)", c:false},
-        {t:"=ACCUMULATE(A1:A10)", c:false}
-      ]},
-    { id: 18, text: "Which feature helps track changes made to a workbook?", options: [
-        {t:"Track Changes", c:true},
-        {t:"Change Log", c:false},
-        {t:"History Panel", c:false},
-        {t:"Formula Audit", c:false}
-      ]},
-    { id: 19, text: "What is the maximum number of rows in an Excel worksheet?", options: [
-        {t:"1,048,576", c:true},
-        {t:"65,536", c:false},
-        {t:"500,000", c:false},
-        {t:"2,147,483,648", c:false}
-      ]},
-    { id: 20, text: "What is the default file extension for an Excel workbook?", options: [
-        {t:".xls", c:false},
-        {t:".xlsx", c:true},
-        {t:".csv", c:false},
-        {t:".txt", c:false}
-      ]},
-    { id: 21, text: "What does pressing CTRL + 1 do in Excel?", options: [
-        {t:"Opens the Format Cells dialog box", c:true},
-        {t:"Opens the Formula Auditing menu", c:false},
-        {t:"Inserts a new worksheet", c:false},
-        {t:"Renames the active cell", c:false}
-      ]},
-    { id: 22, text: "What is the purpose of \"Freeze Panes\" in Excel?", options: [
-        {t:"It locks specific rows/columns while scrolling", c:true},
-        {t:"It prevents data deletion", c:false},
-        {t:"It locks the workbook", c:false},
-        {t:"It hides empty rows", c:false}
-      ]},
-    { id: 23, text: "Which Excel feature allows you to filter a dataset dynamically based on user input?", options: [
-        {t:"PivotTable", c:false},
-        {t:"Advanced Filter", c:true},
-        {t:"Data Validation", c:false},
-        {t:"Slicers", c:false}
-      ]},
-    { id: 24, text: "What happens if you apply a filter and then delete a filtered-out row?", options: [
-        {t:"The row remains hidden but is deleted when the filter is cleared", c:false},
-        {t:"The row is permanently deleted", c:true},
-        {t:"The row is restored when the filter is removed", c:false},
-        {t:"The filter gets removed automatically", c:false}
-      ]},
-    { id: 25, text: "What function sorts a dataset based on a specified column?", options: [
-        {t:"SORT()", c:true},
-        {t:"FILTER()", c:false},
-        {t:"SORTBY()", c:false},
-        {t:"UNIQUE()", c:false}
-      ]},
-    { id: 26, text: "In a custom sort, how can you sort by multiple columns?", options: [
-        {t:'Use "Sort & Filter" and add multiple levels', c:true},
-        {t:"Use the SORT() function", c:false},
-        {t:"Apply an Advanced Filter", c:false},
-        {t:"Sort one column, then another manually", c:false}
-      ]},
-    { id: 27, text: "What is the difference between SEARCH(\"Excel\", A1) and FIND(\"Excel\", A1)?", options: [
-        {t:"SEARCH() is case-sensitive, FIND() is not", c:false},
-        {t:"FIND() is case-sensitive, SEARCH() is not", c:true},
-        {t:"SEARCH() returns an error if text is not found, FIND() does not", c:false},
-        {t:"Both return the same results", c:false}
-      ]},
-    { id: 28, text: "What is the output of =TEXTAFTER(\"Excel2025\", \"Excel\")?", options: [
-        {t:"2025", c:true},
-        {t:"Excel2025", c:false},
-        {t:"Excel", c:false},
-        {t:"#VALUE!", c:false}
-      ]},
-    { id: 29, text: "What does =MID(\"Microsoft Excel\",6,5) return?", options: [
-        {t:"soft", c:true},
-        {t:"soft (includes the space)", c:false},
-        {t:"Micro", c:false},
-        {t:"soft E", c:false}
-      ]},
-    { id: 30, text: "What is the result of =TEXTBEFORE(\"Excel_Training_2025\", \" _ \" , 2)?", options: [
-        {t:"Excel", c:true},
-        {t:"Excel _ Training", c:false},
-        {t:"Training", c:false},
-        {t:"2025", c:false}
-      ]},
-    { id: 31, text: "Which function helps return one value if a condition is TRUE and another if FALSE?", options: [
-        {t:"SWITCH()", c:false},
-        {t:"IF()", c:true},
-        {t:"IFS()", c:false},
-        {t:"VLOOKUP()", c:false}
-      ]},
-    { id: 32, text: "What does =IF(A1=\"\", \"Empty\", \"Not Empty\") return if A1 contains only a space?", options: [
-        {t:"Empty", c:false},
-        {t:"Not Empty", c:true},
-        {t:"#VALUE!", c:false},
-        {t:"0", c:false}
-      ]},
-    { id: 33, text: "Which shortcut applies bold formatting in Excel?", options: [
-        {t:"CTRL + B", c:true},
-        {t:"CTRL + I", c:false},
-        {t:"CTRL + U", c:false},
-        {t:"CTRL + SHIFT + B", c:false}
-      ]},
-    { id: 34, text: "If a cell is formatted as \"Accounting\", how does a negative value appear?", options: [
-        {t:"Red text", c:false},
-        {t:"(123.45)", c:true},
-        {t:"-123.45", c:false},
-        {t:"$123.45", c:false}
-      ]},
-    { id: 35, text: "What is the correct cell reference for column B, row 10?", options: [
-        {t:"B10", c:true},
-        {t:"10B", c:false},
-        {t:"R10C2", c:false},
-        {t:"B-10", c:false}
-      ]},
-    { id: 36, text: "Which formula is an absolute reference?", options: [
-        {t:"$A$1", c:true},
-        {t:"A1", c:false},
-        {t:"A$1", c:false},
-        {t:"R1C1", c:false}
-      ]},
-    { id: 37, text: "Which of the following refers to all the cells in column D?", options: [
-        {t:"D:D", c:true},
-        {t:"D1:D10000", c:false},
-        {t:"D$1:D$1000", c:false},
-        {t:"D*", c:false}
-      ]},
-    { id: 38, text: "What happens when you press CTRL + Enter after entering a formula?", options: [
-        {t:"The formula is copied to adjacent cells", c:false},
-        {t:"The formula is entered without moving the cursor", c:true},
-        {t:"The active cell moves to the next row", c:false},
-        {t:"The formula is entered as an array formula", c:false}
-      ]},
-    { id: 39, text: "What happens if you enter a value and press ALT + Enter?", options: [
-        {t:"A new row is inserted", c:false},
-        {t:"The text wraps within the same cell", c:true},
-        {t:"The value is copied", c:false},
-        {t:"The text becomes bold", c:false}
-      ]},
-    { id: 40, text: "Which number format automatically adds decimal places?", options: [
-        {t:"Accounting", c:true},
-        {t:"General", c:false},
-        {t:"Text", c:false},
-        {t:"Currency", c:false}
-      ]},
-    { id: 41, text: "If a value is displayed as #######, what is the issue?", options: [
-        {t:"The column width is too small", c:true},
-        {t:"The value is negative", c:false},
-        {t:"The cell contains text, not numbers", c:false},
-        {t:"The formula is incorrect", c:false}
-      ]},
-    { id: 42, text: "How can you round a number to two decimal places without changing the stored value?", options: [
-        {t:'Format the cell as "Number" with 2 decimal places', c:true},
-        {t:"Use the ROUND() function", c:false},
-        {t:"Multiply by 100 and divide by 100", c:false},
-        {t:"Convert the number to text", c:false}
-      ]},
-    { id: 43, text: "What does CTRL + Z do in Excel?", options: [
-        {t:"Undo the last action", c:true},
-        {t:"Redo the last action", c:false},
-        {t:"Zoom the worksheet", c:false},
-        {t:"Open the format menu", c:false}
-      ]},
-    { id: 44, text: "What is the default font in Excel 365?", options: [
-        {t:"Calibri", c:true},
-        {t:"Arial", c:false},
-        {t:"Times New Roman", c:false},
-        {t:"Verdana", c:false}
-      ]},
-    { id: 45, text: "What function would you use to return an approximate match when searching for a value in a sorted list?", options: [
-        {t:"VLOOKUP with TRUE as the last argument", c:true},
-        {t:"HLOOKUP with FALSE as the last argument", c:false},
-        {t:"XLOOKUP with an exact match mode", c:false},
-        {t:"INDEX with MATCH using an exact match", c:false}
-      ]},
-    { id: 46, text: "Which function allows you to search for a value in a column and return a corresponding value from another column, without requiring the data to be sorted?", options: [
-        {t:"INDEX", c:false},
-        {t:"VLOOKUP", c:false},
-        {t:"HLOOKUP", c:false},
-        {t:"XLOOKUP", c:true}
-      ]},
-    { id: 47, text: "What is the primary difference between VLOOKUP and INDEX-MATCH?", options: [
-        {t:"VLOOKUP allows searching both horizontally and vertically, while INDEX- MATCH only works vertically", c:false},
-        {t:"INDEX-MATCH is more flexible as it allows searching to the left, whereas VLOOKUP only searches to the right", c:true},
-        {t:"VLOOKUP is always faster than INDEX-MATCH", c:false},
-        {t:"INDEX-MATCH requires data to be sorted, while VLOOKUP does not", c:false}
-      ]},
-    { id: 48, text: "Which function returns the row number of a specified value within a given range?", options: [
-        {t:"INDEX", c:false},
-        {t:"MATCH", c:true},
-        {t:"HLOOKUP", c:false},
-        {t:"FIND", c:false}
-      ]},
-    { id: 49, text: "If A1:A10 contains numbers and you want to sum values greater than 50, which function should you use?", options: [
-        {t:"SUM(A1:A10)", c:false},
-        {t:'SUMIF(A1:A10, ">50")', c:true},
-        {t:"COUNTIF(A1:A10, \">50\")", c:false},
-        {t:'SUMIFS(A1:A10, A1:A10, ">50")', c:false}
-      ]},
-    { id: 50, text: "What function should you use to count the number of cells in range A1:A100 that contain values greater than 10 and less than 50?", options: [
-        {t:'COUNTIF(A1:A100, ">10")', c:false},
-        {t:'COUNTIFS(A1:A100, ">10", A1:A100, "<50")', c:true},
-        {t:'SUMIF(A1:A100, ">10")', c:false},
-        {t:'IF(A1:A100, ">10", "<50")', c:false}
-      ]},
-    { id: 51, text: "Which Excel function can remove duplicate values from a range while returning the results as an array?", options: [
-        {t:"UNIQUE()", c:true},
-        {t:"REMOVE.DUPLICATES()", c:false},
-        {t:"FILTER()", c:false},
-        {t:"SORT()", c:false}
-      ]},
-    { id: 52, text: "If cell A1 contains '2025-08-11' (date format), which function will return the year 2025?", options: [
-        {t:"YEAR(A1)", c:true},
-        {t:"TEXT(A1, \"YYYY\")", c:false},
-        {t:"DATEVALUE(A1)", c:false},
-        {t:"=2025", c:false}
-      ]}
+    {id:3, q:"What is Microsoft Word?", opts:["A web browser","A spreadsheet application","A word processing software","A video editing software"], answer:"c"},
+    {id:4, q:"Which ribbon tab in Microsoft Word is used for formatting text?", opts:["Home","Insert","Page Layout","Review"], answer:"a"},
+    {id:5, q:"Which keyboard shortcut is used to bold text in Microsoft Word?", opts:["Ctrl + I","Ctrl + U","Ctrl + P","Ctrl + B"], answer:"d"},
+    {id:6, q:"Which option in Microsoft Word is used to save a document?", opts:["Save and Close","Save and Send","Save As","Save and Publish"], answer:"c"},
+    {id:7, q:"Which feature in Microsoft Word is used to check spelling and grammar errors?", opts:["AutoCorrect","AutoSummarize","Word Count","Spelling and Grammar"], answer:"d"},
+    {id:8, q:"Which ribbon tab in Microsoft Word is used for adding tables?", opts:["Home","Insert","Page Layout","Review"], answer:"b"},
+    {id:9, q:"Which keyboard shortcut is used to undo the last action in Microsoft Word?", opts:["Ctrl + Z","Ctrl + Y","Ctrl + X","Ctrl + C"], answer:"a"},
+    {id:10, q:"We can insert a page number at?", opts:["Header","Footer","None","Both A an B"], answer:"d"},
+    {id:11, q:"Which ribbon tab in Microsoft Word is used for adding page numbers?", opts:["Home","Insert","Page Layout","Review"], answer:"b"},
+    {id:12, q:"Which keyboard shortcut is used to align text to the center in Microsoft Word?", opts:["Ctrl + L","Ctrl + R","Ctrl + E","Ctrl + J"], answer:"c"},
+    {id:13, q:"Which of the following keyboard shortcuts is used to save a Microsoft Word document?", opts:["Ctrl + A","Ctrl + S","Ctrl + C","Ctrl + V"], answer:"b"},
+    {id:14, q:"Which of the following is not a type of page orientation in Microsoft Word?", opts:["Portrait","Square","Mirror","Landscape"], answer:"b"},
+    {id:15, q:"Which of the following is not a type of page break in Microsoft Word?", opts:["Next Page","Continuous","Column","Section Break"], answer:"d"},
+    {id:16, q:"Which of the following is not a type of alignment in Microsoft Word?", opts:["Left","Right","Center","Justified","Hanging"], answer:"e"},
+    {id:17, q:"Which of the following is not part of the type of list?", opts:["Bulleted List","Single-level List","Numbered List","Multilevel List"], answer:"b"},
+    {id:18, q:"The Space left between the margin and the start of a paragraph is called", opts:["Spacing","Gutter","Indentation","Alignment"], answer:"c"},
+    {id:19, q:"What does the acronym WYSIWYG stand for in relation to Microsoft Word?", opts:["What You Send Is What You Get","What You Set Is What You Gain","What You See Is What You Get","What You Save Is What You Generate"], answer:"c"},
+    {id:20, q:"Which ribbon tab is used to change the font style, size, and color in Microsoft Word?", opts:["Review","Insert","Page Layout","Home"], answer:"d"},
+    {id:21, q:"In which view of MS Word are headers and footers visible?", opts:["Normal View","Print Layout View","Page Layout View","Draft View"], answer:"b"},
+    {id:22, q:"Text-Styling feature in MS Word is known as", opts:["WordArt","WordColour","WordFont","WordFill"], answer:"a"},
+    {id:23, q:"Which of the following MS-Word features crosses texts out by drawing a line through it?", opts:["Pagination","Underline","Strikethrough","Subscript","None of the above"], answer:"c"},
+    {id:24, q:"When opening a new document in Microsoft Word, the default font size is?", opts:["10 point","12 point","16 point","11 point"], answer:"d"},
+    {id:25, q:"What is the default font style in MS Word?", opts:["Calibri","Times New Roman","Arial","Malgun Gothic"], answer:"a"},
+    {id:26, q:"What is shortcut key to open the 'Font' Dialogue box in MS-Word?", opts:["Alt+F","Ctrl+D","Ctrl+F","Alt+Ctrl+D"], answer:"b"},
+    {id:27, q:"In MS Word, a character that is raised and is smaller above the baseline is known as", opts:["Superscript","Raised","Outlined","Subscript"], answer:"a"},
+    {id:28, q:"The valid format for saving of a MS Word document is", opts:[".jpeg",".doc",".pdf",".txt",".pptx"], answer:"b"},
+    {id:29, q:"What do you call the distance between the written text and the edge of a paper?", opts:["Alignment","Ruler line","Indent Stop","Margin"], answer:"d"},
+    {id:30, q:"…. are the blank spaces found at line the top, bottom, left, and, right sides a document", opts:["Spacings","Margins","Indentations","Alignments"], answer:"b"},
+    {id:31, q:"All the following are shortcuts for alignments except?", opts:["Ctrl+D","Ctrl+L","Ctrl+E","Ctrl+R","Ctrl+J","None of the above"], answer:"a"},
+    {id:32, q:"What is the shortcut to increase the font size of a text by 1 point?", opts:["Ctrl+]","Ctrl+[","Ctrl+1","Ctrl+I"], answer:"a"},
+    {id:33, q:"What is the shortcut to decrease the font size of a text by 1 point?", opts:["Ctrl+1","Ctrl+]","Ctrl+I","Ctrl+[","Ctrl+Y"], answer:"d"},
+    {id:34, q:"What is the shortcut for cutting a text in MS-Word?", opts:["Ctrl+C","Ctrl+X","Ctrl+V","Ctrl+Z","Ctrl+K"], answer:"b"},
+    {id:35, q:"Which of the following is not a type of document view in Microsoft Word?", opts:["Draft","Print Layout","Web Layout","Handwriting"], answer:"d"},
+    {id:36, q:"Which Toolbar is located directly next to the Microsoft Office Button?", opts:["Title Bar","Ribbon","Search toolbar","Quick Access Toolbar"], answer:"d"},
+    {id:37, q:"Which Bar shows the document's or application name when it is opened in MS Word?", opts:["Quick Access Toolbar","Title Bar","Home tab","Ribbon"], answer:"b"},
+    {id:38, q:"The number of tabs in the ribbon of Microsoft Word depends on the version...", opts:["True","False"], answer:"a"},
+    {id:39, q:"There are several ways to save a Microsoft Word document, these includes all except?", opts:["Click the Save button","Click File > Save/Save As","Type name in title bar","Ctrl+S","Ctrl+Shift+S"], answer:"c"},
+    {id:40, q:"Which procedure helps you save a Word doc as a PDF?", opts:["Option A","Option B","Option C","All of the above"], answer:"d"},
+    {id:41, q:"Which of the following is used to change text colour in an MS Word document?", opts:["Font color","Text highlight colour","Shading","Styles","None of the above","All of the above"], answer:"a"},
+    {id:42, q:"What is the purpose of sharing a Word document with others?", opts:["Show off","Backup","Collaborate","Keep private"], answer:"c"},
+    {id:43, q:"Which feature allows you to share via email/cloud?", opts:["Save As","Track Changes","Comments","Share"], answer:"d"},
+    {id:44, q:"Benefit of saving to OneDrive/SharePoint?", opts:["Local backup","Access anywhere","Better formatting","Prevent editing"], answer:"b"},
+    {id:45, q:"Which option in Spelling & Grammar allows you to add to dictionary?", opts:["Add to Dictionary","Add","Ignore","Add to Thesaurus"], answer:"a"},
+    {id:46, q:"Proofreading technique reading backwards?", opts:["Chunking","Scanning","Skimming","Reverse Reading"], answer:"d"},
+    {id:47, q:"Proofreading technique reading aloud?", opts:["Reading Out Loud","Reciting","Reading Loud","Grammar Checker"], answer:"a"},
+    {id:48, q:"Which option in Spelling & Grammar auto corrects?", opts:["AutoRight","Ignore All","AutoCorrect","Change","None"], answer:"c"},
+    {id:49, q:"Proofreading technique reading quickly for overview?", opts:["Skimming","Scanning","Chunking","AutoCorrect"], answer:"a"},
+    {id:50, q:"Purpose of Review tab in Word?", opts:["Collaboration","Format text","Add headers/footers","Track changes/comments"], answer:"d"},
+    {id:51, q:"Purpose of co-authoring in Word?", opts:["Save different format","Track changes","Work together","Help typing","None"], answer:"c"},
+    {id:52, q:"Shortcut to select all in a doc?", opts:["Ctrl+A","Ctrl+C","Ctrl+D","Ctrl+U"], answer:"a"},
+    }
   ];
 
   // UTILS
