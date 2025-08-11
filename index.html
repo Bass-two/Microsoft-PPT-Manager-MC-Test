@@ -148,7 +148,7 @@
     <div class="card">
       <p class="intro">
         Hi! Would you mind completing this quiz? This is to help us evaluate your understanding of the training you were given. Thank you!
-        <br><strong>Total: 50 Points</strong>
+        <br><strong>Total: 52 Questions</strong>
       </p>
 
       <form id="testForm" autocomplete="off" onsubmit="return handleSubmit(event)">
@@ -182,14 +182,10 @@
   </div>
 
   <script>
-  // ---------------------- CONFIG ----------------------
-  // Paste your deployed Google Apps Script web app URL here (the one you get after deploying).
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZJk7oEVSH7rz-ipVjrKGcxLxj952y93dcQBmhBR86M-yptDWzAGPjfXQX9DHJwmD-1A/exec";
+  // your Apps Script URL
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZcd550lbk_2tpBl_kYhes-bf9YnriHi3NAoV6jRGPcLDUUCpUJPh2lzmWxmlb0oyYMg/exec";
 
-  // ---------------------- QUESTIONS ----------------------
-  // Name (Q1) and Email (Q2) are fixed fields above.
-  // Multiple-choice questions are Q3..Q52 (50 questions total).
-  // Correct answers are embedded (client-side scoring). Edit the 'c' boolean to change correct answers.
+  // Q3..Q52 (50 MCQs)
   const mcQuestions = [
     { id: 3, text: "What is the keyboard shortcut to open the Filter menu in Excel?", options: [
         {t:"CTRL + F", c:false},
@@ -469,17 +465,17 @@
       ]},
     { id: 49, text: "If A1:A10 contains numbers and you want to sum values greater than 50, which function should you use?", options: [
         {t:"SUM(A1:A10)", c:false},
-        {t:'SUMIF(A1:A10, \">50\")', c:true},
+        {t:'SUMIF(A1:A10, ">50")', c:true},
         {t:"COUNTIF(A1:A10, \">50\")", c:false},
-        {t:'SUMIFS(A1:A10, A1:A10, \">50\")', c:false}
+        {t:'SUMIFS(A1:A10, A1:A10, ">50")', c:false}
       ]},
     { id: 50, text: "What function should you use to count the number of cells in range A1:A100 that contain values greater than 10 and less than 50?", options: [
-        {t:'COUNTIF(A1:A100, \">10\")', c:false},
-        {t:'COUNTIFS(A1:A100, \">10\", A1:A100, \"<50\")', c:true},
-        {t:'SUMIF(A1:A100, \">10\")', c:false},
-        {t:'IF(A1:A100, \">10\", \"<50\")', c:false}
-      ]}
-     { id: 51, text: "Which Excel function can remove duplicate values from a range while returning the results as an array?", options: [
+        {t:'COUNTIF(A1:A100, ">10")', c:false},
+        {t:'COUNTIFS(A1:A100, ">10", A1:A100, "<50")', c:true},
+        {t:'SUMIF(A1:A100, ">10")', c:false},
+        {t:'IF(A1:A100, ">10", "<50")', c:false}
+      ]},
+    { id: 51, text: "Which Excel function can remove duplicate values from a range while returning the results as an array?", options: [
         {t:"UNIQUE()", c:true},
         {t:"REMOVE.DUPLICATES()", c:false},
         {t:"FILTER()", c:false},
@@ -493,26 +489,24 @@
       ]}
   ];
 
-  // ---------------------- UTILS ----------------------
+  // UTILS
   function shuffleArray(a){
     for(let i=a.length-1;i>0;i--){
       const j = Math.floor(Math.random()*(i+1));
       [a[i], a[j]] = [a[j], a[i]];
     }
   }
-
   function escapeHtml(s){
     return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
   }
 
-  // Render only MCQs and shuffle them; keep Q1 & Q2 fixed above
+  // Render MCQs (shuffle questions and options)
   function renderMCQs(){
     const container = document.getElementById('questionsContainer');
     container.innerHTML = '';
-    const qs = JSON.parse(JSON.stringify(mcQuestions)); // deep copy
-    shuffleArray(qs); // shuffle question order (MCQs only)
-
-    qs.forEach((q, idx) => {
+    const qs = JSON.parse(JSON.stringify(mcQuestions));
+    shuffleArray(qs); // shuffle question order
+    qs.forEach((q) => {
       shuffleArray(q.options); // shuffle options
       const qDiv = document.createElement('div');
       qDiv.className = 'question';
@@ -531,7 +525,6 @@
         const label = document.createElement('label');
         label.className = 'option-label';
         label.htmlFor = optId;
-        // include data-correct so scoring can read it
         label.innerHTML = `<input id="${optId}" type="radio" name="q_${q.id}" value="${escapeHtml(opt.t)}" data-correct="${opt.c}" required> <span>${escapeHtml(opt.t)}</span>`;
         optionsDiv.appendChild(label);
       });
@@ -541,10 +534,10 @@
     });
   }
 
-  // Collect answers for Q3..Q50 and compute score (score counts only MCQs)
+  // Collect answers & score
   function collectAndScore(){
     let score = 0;
-    const answers = []; // {id: qid, answer: text}
+    const answers = [];
     for(const q of mcQuestions){
       const name = `q_${q.id}`;
       const radios = document.getElementsByName(name);
@@ -564,9 +557,9 @@
     return {score, answers};
   }
 
-  // POST submission to Apps Script
+  // Send to Google Sheet
   async function sendToSheet(payload){
-    if(!SCRIPT_URL || SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbwZJk7oEVSH7rz-ipVjrKGcxLxj952y93dcQBmhBR86M-yptDWzAGPjfXQX9DHJwmD-1A/exec') !== -1){
+    if(!SCRIPT_URL || !SCRIPT_URL.startsWith('https://script.google.com/')){
       console.warn('SCRIPT_URL not set - skipping POST to Google Sheet.');
       return {ok:false, message:'No script URL provided.'};
     }
@@ -585,7 +578,7 @@
     }
   }
 
-  // ---------------------- FORM HANDLER ----------------------
+  // Form handler
   async function handleSubmit(e){
     e.preventDefault();
     const form = document.getElementById('testForm');
@@ -594,55 +587,44 @@
       return false;
     }
 
-    // Score MCQs
     const result = collectAndScore();
     const score = result.score;
-    const total = mcQuestions.length; // 48
-
+    const total = mcQuestions.length; // 50
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
 
-    // Build payload
     const payload = {
       timestamp: new Date().toISOString(),
-      name: name,
-      email: email,
-      score: score,
-      total: total,
-      answers: result.answers // array of {id, answer} for Q3..Q50
+      name,
+      email,
+      score,
+      total,
+      answers: result.answers
     };
 
-    // Show final score only
     alert(`Your score: ${score} / ${total}\n\nThank you for completing the test!`);
 
-    // Send to sheet (best-effort)
+    // best-effort send
     sendToSheet(payload).then(res=>{
-      if(!res.ok){
-        console.warn('Submission not saved:', res.message);
-      }
+      if(!res.ok) console.warn('Submission not saved:', res.message);
     });
 
-    // Reset form and re-render MCQs (reshuffle)
+    // reset & reshuffle
     form.reset();
-    // ensure radios cleared
-    form.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
-    window.scrollTo({top:0, behavior:'smooth'});
+    document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
     renderMCQs();
-
+    window.scrollTo({top:0, behavior:'smooth'});
     return false;
   }
 
-  // Reset on unload (restart behavior)
+  // Restart-on-leave
   window.addEventListener('beforeunload', function(e){
     const f = document.getElementById('testForm');
     if(f) f.reset();
   });
 
-  // Init
+  // init
   renderMCQs();
-  // ensure no radios pre-checked
-  document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
-
   </script>
 </body>
 </html>
