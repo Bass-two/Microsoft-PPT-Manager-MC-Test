@@ -1,159 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Datamaker MS-Word Multiple Choice Test</title>
-  <style>
-    :root{
-      --accent:#107C41;
-      --card-bg:#fff;
-      --page-bg:#f4f4f4;
-      --muted:#666;
-      --maxw:980px;
-    }
-    body{
-      margin:0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background:var(--page-bg);
-      color:#111;
-      -webkit-font-smoothing:antialiased;
-    }
-    .topbar {
-      background:var(--accent);
-      color:white;
-      padding:22px 16px;
-      text-align:center;
-      font-size:1.25rem;
-      font-weight:600;
-    }
-    .wrap{
-      max-width:var(--maxw);
-      margin:28px auto;
-      padding:0 16px;
-    }
-    .card{
-      background:var(--card-bg);
-      border-radius:10px;
-      box-shadow:0 6px 18px rgba(16,124,65,0.06);
-      padding:28px;
-      overflow:auto;
-    }
-    .intro{
-      color:var(--muted);
-      margin-bottom:18px;
-      font-size:0.95rem;
-    }
-    .meta{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-    .meta .field{
-      flex:1 1 260px;
-    }
-    label.input-label{
-      display:block;
-      font-weight:600;
-      margin-bottom:6px;
-    }
-    input[type="text"], input[type="email"]{
-      width:100%;
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #d0d0d0;
-      font-size:0.98rem;
-    }
-    hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
-    .question{
-      margin-bottom:14px;
-      padding:12px;
-      border-radius:8px;
-      background:#fcfffd;
-      border:1px solid #f0f6f1;
-    }
-    .q-header{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-bottom:8px;
-      flex-wrap:wrap;
-    }
-    .q-number{
-      min-width:36px;
-      height:36px;
-      border-radius:50%;
-      background:var(--accent);
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      box-shadow:0 2px 6px rgba(16,124,65,0.12);
-    }
-    .q-text{
-      font-weight:600;
-      font-size:0.98rem;
-      flex:1 1 auto;
-    }
-    .options{
-      margin-top:8px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .option-label{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #eee;
-      cursor:pointer;
-      user-select:none;
-    }
-    .option-label:hover{ background:#fafdf9; }
-    .option-label input{ transform:scale(1.02); margin:0; }
-    .submit-row{
-      margin-top:20px;
-      display:flex;
-      justify-content:flex-end;
-      gap:12px;
-      align-items:center;
-    }
-    button.submit-btn{
-      background:var(--accent);
-      color:white;
-      padding:12px 18px;
-      border-radius:8px;
-      border:none;
-      font-weight:700;
-      cursor:pointer;
-      font-size:1rem;
-    }
-    button.submit-btn:hover{ background:#0e6b39; }
-    .note{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
-    @media (max-width:720px){
-      .meta{ flex-direction:column; }
-      .submit-row{ justify-content:center; }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Datamaker MS-Word Multiple Choice Test</title>
+<style>
+  :root{
+    --accent:#107C41;
+    --bg:#f4f4f4;
+    --card:#fff;
+    --muted:#666;
+    --maxw:980px;
+  }
+  body{
+    margin:0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background:var(--bg);
+    color:#111;
+  }
+  .topbar {
+    background:var(--accent);
+    color:white;
+    padding:18px 12px;
+    text-align:center;
+    font-size:1.2rem;
+    font-weight:700;
+  }
+  .wrap{
+    max-width:var(--maxw);
+    margin:26px auto;
+    padding:0 16px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:10px;
+    padding:22px;
+    box-shadow:0 6px 18px rgba(16,124,65,0.06);
+  }
+  .intro{ color:var(--muted); margin-bottom:18px; }
+  .meta{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+  .meta .field{ flex:1 1 300px; }
+  label.input-label{ display:block; font-weight:600; margin-bottom:6px; }
+  input[type="text"], input[type="email"]{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d0d0d0;
+  }
+  hr.sep{ border:none; height:1px; background:#eef2f0; margin:20px 0; }
+  .question{ margin-bottom:14px; padding:12px; border-radius:8px; background:#fcfffd; border:1px solid #f0f6f1; }
+  .q-header{ display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+  .q-number{ min-width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .q-text{ font-weight:600; font-size:0.98rem; flex:1 1 auto; }
+  .options{ margin-top:8px; display:flex; flex-direction:column; gap:8px; }
+  .option-label{ display:flex; gap:12px; align-items:center; padding:10px 12px; border-radius:8px; border:1px solid #eee; cursor:pointer; user-select:none; }
+  .option-label input{ transform:scale(1.02); margin:0; }
+  .submit-row{ margin-top:20px; display:flex; justify-content:flex-end; gap:12px; align-items:center; }
+  button.submit-btn{ background:var(--accent); color:white; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
+  button.submit-btn:hover{ background:#0e6b39; }
+  .note{ color:var(--muted); font-size:0.95rem; margin-top:6px; }
+  #result{ margin-top:14px; font-weight:700; text-align:center; }
+  @media (max-width:720px){ .meta{ flex-direction:column; } .submit-row{ justify-content:center; } }
+</style>
 </head>
 <body>
   <div class="topbar">Datamaker MS-Word Multiple Choice Test</div>
-
   <div class="wrap">
     <div class="card">
       <p class="intro">
-        Hi! Would you mind completing this quiz? This is to help us evaluate your understanding of the training you were given. Thank you!
+        Hi! Please complete this quiz to help us evaluate your understanding of the training. Thank you!
         <br><strong>Total: 52 Questions</strong>
       </p>
 
-      <form id="testForm" autocomplete="off" onsubmit="return handleSubmit(event)">
-
-        <!-- Q1 & Q2 fixed at top -->
+      <form id="quizForm" autocomplete="off">
+        <!-- Q1 & Q2 fixed -->
         <div class="meta">
           <div class="field">
             <label class="input-label" for="name">Q1 — Name *</label>
@@ -167,7 +84,6 @@
 
         <hr class="sep" />
 
-        <!-- Container for MCQs Q3..Q52 (shuffled) -->
         <div id="questionsContainer"></div>
 
         <div class="submit-row">
@@ -175,207 +91,444 @@
           <button type="submit" class="submit-btn">Submit</button>
         </div>
 
+        <div id="result"></div>
         <p class="note">This content is neither created nor endorsed by Microsoft. The data you submit will be sent to the form owner.</p>
 
       </form>
     </div>
   </div>
 
-  <script>
-  // your Apps Script URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9Yr7pJRTCD4Z8Q38qZ1hJ4iMzOyLmZes9Q501moiJDWMqOq4j_MrBBpQZbbUpwHGqJw/exec";
+<script>
+/* --- CONFIG --- */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx27nvFJGoz2eiYMZ76eJXPjdBYdGqWksQX7lg_3pUMmlUZSbLhWL53SzHYk_nl5ec5Iw/exec";
 
-  // Q3..Q52 (50 MCQs)
-  const mcQuestions = [
-    {id:3, q:"What is Microsoft Word?", opts:["A web browser","A spreadsheet application","A word processing software","A video editing software"], answer:"c"},
-    {id:4, q:"Which ribbon tab in Microsoft Word is used for formatting text?", opts:["Home","Insert","Page Layout","Review"], answer:"a"},
-    {id:5, q:"Which keyboard shortcut is used to bold text in Microsoft Word?", opts:["Ctrl + I","Ctrl + U","Ctrl + P","Ctrl + B"], answer:"d"},
-    {id:6, q:"Which option in Microsoft Word is used to save a document?", opts:["Save and Close","Save and Send","Save As","Save and Publish"], answer:"c"},
-    {id:7, q:"Which feature in Microsoft Word is used to check spelling and grammar errors?", opts:["AutoCorrect","AutoSummarize","Word Count","Spelling and Grammar"], answer:"d"},
-    {id:8, q:"Which ribbon tab in Microsoft Word is used for adding tables?", opts:["Home","Insert","Page Layout","Review"], answer:"b"},
-    {id:9, q:"Which keyboard shortcut is used to undo the last action in Microsoft Word?", opts:["Ctrl + Z","Ctrl + Y","Ctrl + X","Ctrl + C"], answer:"a"},
-    {id:10, q:"We can insert a page number at?", opts:["Header","Footer","None","Both A an B"], answer:"d"},
-    {id:11, q:"Which ribbon tab in Microsoft Word is used for adding page numbers?", opts:["Home","Insert","Page Layout","Review"], answer:"b"},
-    {id:12, q:"Which keyboard shortcut is used to align text to the center in Microsoft Word?", opts:["Ctrl + L","Ctrl + R","Ctrl + E","Ctrl + J"], answer:"c"},
-    {id:13, q:"Which of the following keyboard shortcuts is used to save a Microsoft Word document?", opts:["Ctrl + A","Ctrl + S","Ctrl + C","Ctrl + V"], answer:"b"},
-    {id:14, q:"Which of the following is not a type of page orientation in Microsoft Word?", opts:["Portrait","Square","Mirror","Landscape"], answer:"b"},
-    {id:15, q:"Which of the following is not a type of page break in Microsoft Word?", opts:["Next Page","Continuous","Column","Section Break"], answer:"d"},
-    {id:16, q:"Which of the following is not a type of alignment in Microsoft Word?", opts:["Left","Right","Center","Justified","Hanging"], answer:"e"},
-    {id:17, q:"Which of the following is not part of the type of list?", opts:["Bulleted List","Single-level List","Numbered List","Multilevel List"], answer:"b"},
-    {id:18, q:"The Space left between the margin and the start of a paragraph is called", opts:["Spacing","Gutter","Indentation","Alignment"], answer:"c"},
-    {id:19, q:"What does the acronym WYSIWYG stand for in relation to Microsoft Word?", opts:["What You Send Is What You Get","What You Set Is What You Gain","What You See Is What You Get","What You Save Is What You Generate"], answer:"c"},
-    {id:20, q:"Which ribbon tab is used to change the font style, size, and color in Microsoft Word?", opts:["Review","Insert","Page Layout","Home"], answer:"d"},
-    {id:21, q:"In which view of MS Word are headers and footers visible?", opts:["Normal View","Print Layout View","Page Layout View","Draft View"], answer:"b"},
-    {id:22, q:"Text-Styling feature in MS Word is known as", opts:["WordArt","WordColour","WordFont","WordFill"], answer:"a"},
-    {id:23, q:"Which of the following MS-Word features crosses texts out by drawing a line through it?", opts:["Pagination","Underline","Strikethrough","Subscript","None of the above"], answer:"c"},
-    {id:24, q:"When opening a new document in Microsoft Word, the default font size is?", opts:["10 point","12 point","16 point","11 point"], answer:"d"},
-    {id:25, q:"What is the default font style in MS Word?", opts:["Calibri","Times New Roman","Arial","Malgun Gothic"], answer:"a"},
-    {id:26, q:"What is shortcut key to open the 'Font' Dialogue box in MS-Word?", opts:["Alt+F","Ctrl+D","Ctrl+F","Alt+Ctrl+D"], answer:"b"},
-    {id:27, q:"In MS Word, a character that is raised and is smaller above the baseline is known as", opts:["Superscript","Raised","Outlined","Subscript"], answer:"a"},
-    {id:28, q:"The valid format for saving of a MS Word document is", opts:[".jpeg",".doc",".pdf",".txt",".pptx"], answer:"b"},
-    {id:29, q:"What do you call the distance between the written text and the edge of a paper?", opts:["Alignment","Ruler line","Indent Stop","Margin"], answer:"d"},
-    {id:30, q:"…. are the blank spaces found at line the top, bottom, left, and, right sides a document", opts:["Spacings","Margins","Indentations","Alignments"], answer:"b"},
-    {id:31, q:"All the following are shortcuts for alignments except?", opts:["Ctrl+D","Ctrl+L","Ctrl+E","Ctrl+R","Ctrl+J","None of the above"], answer:"a"},
-    {id:32, q:"What is the shortcut to increase the font size of a text by 1 point?", opts:["Ctrl+]","Ctrl+[","Ctrl+1","Ctrl+I"], answer:"a"},
-    {id:33, q:"What is the shortcut to decrease the font size of a text by 1 point?", opts:["Ctrl+1","Ctrl+]","Ctrl+I","Ctrl+[","Ctrl+Y"], answer:"d"},
-    {id:34, q:"What is the shortcut for cutting a text in MS-Word?", opts:["Ctrl+C","Ctrl+X","Ctrl+V","Ctrl+Z","Ctrl+K"], answer:"b"},
-    {id:35, q:"Which of the following is not a type of document view in Microsoft Word?", opts:["Draft","Print Layout","Web Layout","Handwriting"], answer:"d"},
-    {id:36, q:"Which Toolbar is located directly next to the Microsoft Office Button?", opts:["Title Bar","Ribbon","Search toolbar","Quick Access Toolbar"], answer:"d"},
-    {id:37, q:"Which Bar shows the document's or application name when it is opened in MS Word?", opts:["Quick Access Toolbar","Title Bar","Home tab","Ribbon"], answer:"b"},
-    {id:38, q:"The number of tabs in the ribbon of Microsoft Word depends on the version...", opts:["True","False"], answer:"a"},
-    {id:39, q:"There are several ways to save a Microsoft Word document, these includes all except?", opts:["Click the Save button","Click File > Save/Save As","Type name in title bar","Ctrl+S","Ctrl+Shift+S"], answer:"c"},
-    {id:40, q:"Which procedure helps you save a Word doc as a PDF?", opts:["Option A","Option B","Option C","All of the above"], answer:"d"},
-    {id:41, q:"Which of the following is used to change text colour in an MS Word document?", opts:["Font color","Text highlight colour","Shading","Styles","None of the above","All of the above"], answer:"a"},
-    {id:42, q:"What is the purpose of sharing a Word document with others?", opts:["Show off","Backup","Collaborate","Keep private"], answer:"c"},
-    {id:43, q:"Which feature allows you to share via email/cloud?", opts:["Save As","Track Changes","Comments","Share"], answer:"d"},
-    {id:44, q:"Benefit of saving to OneDrive/SharePoint?", opts:["Local backup","Access anywhere","Better formatting","Prevent editing"], answer:"b"},
-    {id:45, q:"Which option in Spelling & Grammar allows you to add to dictionary?", opts:["Add to Dictionary","Add","Ignore","Add to Thesaurus"], answer:"a"},
-    {id:46, q:"Proofreading technique reading backwards?", opts:["Chunking","Scanning","Skimming","Reverse Reading"], answer:"d"},
-    {id:47, q:"Proofreading technique reading aloud?", opts:["Reading Out Loud","Reciting","Reading Loud","Grammar Checker"], answer:"a"},
-    {id:48, q:"Which option in Spelling & Grammar auto corrects?", opts:["AutoRight","Ignore All","AutoCorrect","Change","None"], answer:"c"},
-    {id:49, q:"Proofreading technique reading quickly for overview?", opts:["Skimming","Scanning","Chunking","AutoCorrect"], answer:"a"},
-    {id:50, q:"Purpose of Review tab in Word?", opts:["Collaboration","Format text","Add headers/footers","Track changes/comments"], answer:"d"},
-    {id:51, q:"Purpose of co-authoring in Word?", opts:["Save different format","Track changes","Work together","Help typing","None"], answer:"c"},
-    {id:52, q:"Shortcut to select all in a doc?", opts:["Ctrl+A","Ctrl+C","Ctrl+D","Ctrl+U"], answer:"a"},
-    }
-  ];
+/* --- QUESTIONS: Q3..Q52 --- 
+   Format matches screenshot: { id, text, options:[ {t: "option text", c: true/false}, ... ] }
+*/
+const mcQuestions = [
+  { id:3, text:"What is Microsoft Word?", options:[
+      {t:"A web browser", c:false},
+      {t:"A spreadsheet application", c:false},
+      {t:"A word processing software", c:true},
+      {t:"A video editing software", c:false}
+  ]},
+  { id:4, text:"Which ribbon tab in Microsoft Word is used for formatting text?", options:[
+      {t:"Home", c:true},
+      {t:"Insert", c:false},
+      {t:"Page Layout", c:false},
+      {t:"Review", c:false}
+  ]},
+  { id:5, text:"Which keyboard shortcut is used to bold text in Microsoft Word?", options:[
+      {t:"Ctrl + I", c:false},
+      {t:"Ctrl + U", c:false},
+      {t:"Ctrl + P", c:false},
+      {t:"Ctrl + B", c:true}
+  ]},
+  { id:6, text:"Which option in Microsoft Word is used to save a document?", options:[
+      {t:"Save and Close", c:false},
+      {t:"Save and Send", c:false},
+      {t:"Save As", c:true},
+      {t:"Save and Publish", c:false}
+  ]},
+  { id:7, text:"Which feature in Microsoft Word is used to check spelling and grammar errors?", options:[
+      {t:"AutoCorrect", c:false},
+      {t:"AutoSummarize", c:false},
+      {t:"Word Count", c:false},
+      {t:"Spelling and Grammar", c:true}
+  ]},
+  { id:8, text:"Which ribbon tab in Microsoft Word is used for adding tables?", options:[
+      {t:"Home", c:false},
+      {t:"Insert", c:true},
+      {t:"Page Layout", c:false},
+      {t:"Review", c:false}
+  ]},
+  { id:9, text:"Which keyboard shortcut is used to undo the last action in Microsoft Word?", options:[
+      {t:"Ctrl + Z", c:true},
+      {t:"Ctrl + Y", c:false},
+      {t:"Ctrl + X", c:false},
+      {t:"Ctrl + C", c:false}
+  ]},
+  { id:10, text:"We can insert a page number at?", options:[
+      {t:"Header", c:false},
+      {t:"Footer", c:false},
+      {t:"None", c:false},
+      {t:"Both A an B", c:true}
+  ]},
+  { id:11, text:"Which ribbon tab in Microsoft Word is used for adding page numbers?", options:[
+      {t:"Home", c:false},
+      {t:"Insert", c:true},
+      {t:"Page Layout", c:false},
+      {t:"Review", c:false}
+  ]},
+  { id:12, text:"Which keyboard shortcut is used to align text to the center in Microsoft Word?", options:[
+      {t:"Ctrl + L", c:false},
+      {t:"Ctrl + R", c:false},
+      {t:"Ctrl + E", c:true},
+      {t:"Ctrl + J", c:false}
+  ]},
+  { id:13, text:"Which of the following keyboard shortcuts is used to save a Microsoft Word document?", options:[
+      {t:"Ctrl + A", c:false},
+      {t:"Ctrl + S", c:true},
+      {t:"Ctrl + C", c:false},
+      {t:"Ctrl + V", c:false}
+  ]},
+  { id:14, text:"Which of the following is not a type of page orientation in Microsoft Word?", options:[
+      {t:"Portrait", c:false},
+      {t:"Square", c:true},
+      {t:"Mirror", c:false},
+      {t:"Landscape", c:false}
+  ]},
+  { id:15, text:"Which of the following is not a type of page break in Microsoft Word?", options:[
+      {t:"Next Page", c:false},
+      {t:"Continuous", c:false},
+      {t:"Column", c:false},
+      {t:"Section Break", c:true}
+  ]},
+  { id:16, text:"Which of the following is not a type of alignment in Microsoft Word?", options:[
+      {t:"Left", c:false},
+      {t:"Right", c:false},
+      {t:"Center", c:false},
+      {t:"Justified", c:false},
+      {t:"Hanging", c:true}
+  ]},
+  { id:17, text:"Which of the following is not part of the type of list?", options:[
+      {t:"Bulleted List", c:false},
+      {t:"Single-level List", c:true},
+      {t:"Numbered List", c:false},
+      {t:"Multilevel List", c:false}
+  ]},
+  { id:18, text:"The Space left between the margin and the start of a paragraph is called", options:[
+      {t:"Spacing", c:false},
+      {t:"Gutter", c:false},
+      {t:"Indentation", c:true},
+      {t:"Alignment", c:false}
+  ]},
+  { id:19, text:"What does the acronym WYSIWYG stand for in relation to Microsoft Word?", options:[
+      {t:"What You Send Is What You Get", c:false},
+      {t:"What You Set Is What You Gain", c:false},
+      {t:"What You See Is What You Get", c:true},
+      {t:"What You Save Is What You Generate", c:false}
+  ]},
+  { id:20, text:"Which ribbon tab is used to change the font style, size, and color in Microsoft Word?", options:[
+      {t:"Review", c:false},
+      {t:"Insert", c:false},
+      {t:"Page Layout", c:false},
+      {t:"Home", c:true}
+  ]},
+  { id:21, text:"In which view of MS Word are headers and footers visible?", options:[
+      {t:"Normal View", c:false},
+      {t:"Print Layout View", c:true},
+      {t:"Page Layout View", c:false},
+      {t:"Draft View", c:false}
+  ]},
+  { id:22, text:"Text-Styling feature in MS Word is known as", options:[
+      {t:"WordArt", c:true},
+      {t:"WordColour", c:false},
+      {t:"WordFont", c:false},
+      {t:"WordFill", c:false}
+  ]},
+  { id:23, text:"Which of the following MS-Word features crosses texts out by drawing a line through it?", options:[
+      {t:"Pagination", c:false},
+      {t:"Underline", c:false},
+      {t:"Strikethrough", c:true},
+      {t:"Subscript", c:false},
+      {t:"None of the above", c:false}
+  ]},
+  { id:24, text:"When opening a new document in Microsoft Word, the default font size is?", options:[
+      {t:"10 point", c:false},
+      {t:"12 point", c:false},
+      {t:"16 point", c:false},
+      {t:"11 point", c:true}
+  ]},
+  { id:25, text:"What is the default font style in MS Word?", options:[
+      {t:"Calibri", c:true},
+      {t:"Times New Roman", c:false},
+      {t:"Arial", c:false},
+      {t:"Malgun Gothic", c:false}
+  ]},
+  { id:26, text:"What is shortcut key to open the 'Font' Dialogue box in MS-Word?", options:[
+      {t:"Alt+F", c:false},
+      {t:"Ctrl+D", c:true},
+      {t:"Ctrl+F", c:false},
+      {t:"Alt+Ctrl+D", c:false}
+  ]},
+  { id:27, text:"In MS Word, a character that is raised and is smaller above the baseline is known as", options:[
+      {t:"Superscript", c:true},
+      {t:"Raised", c:false},
+      {t:"Outlined", c:false},
+      {t:"Subscript", c:false}
+  ]},
+  { id:28, text:"The valid format for saving of a MS Word document is", options:[
+      {t:".jpeg", c:false},
+      {t:".doc", c:true},
+      {t:".pdf", c:false},
+      {t:".txt", c:false},
+      {t:".pptx", c:false}
+  ]},
+  { id:29, text:"What do you call the distance between the written text and the edge of a paper?", options:[
+      {t:"Alignment", c:false},
+      {t:"Ruler line", c:false},
+      {t:"Indent Stop", c:false},
+      {t:"Margin", c:true}
+  ]},
+  { id:30, text:"…. are the blank spaces found at line the top, bottom, left, and, right sides a document", options:[
+      {t:"Spacings", c:false},
+      {t:"Margins", c:true},
+      {t:"Indentations", c:false},
+      {t:"Alignments", c:false}
+  ]},
+  { id:31, text:"All the following are shortcuts for alignments except?", options:[
+      {t:"Ctrl+D", c:true},
+      {t:"Ctrl+L", c:false},
+      {t:"Ctrl+E", c:false},
+      {t:"Ctrl+R", c:false},
+      {t:"Ctrl+J", c:false},
+      {t:"None of the above", c:false}
+  ]},
+  { id:32, text:"What is the shortcut to increase the font size of a text by 1 point?", options:[
+      {t:"Ctrl+]", c:true},
+      {t:"Ctrl+[", c:false},
+      {t:"Ctrl+1", c:false},
+      {t:"Ctrl+I", c:false}
+  ]},
+  { id:33, text:"What is the shortcut to decrease the font size of a text by 1 point?", options:[
+      {t:"Ctrl+1", c:false},
+      {t:"Ctrl+]", c:false},
+      {t:"Ctrl+I", c:false},
+      {t:"Ctrl+[", c:true},
+      {t:"Ctrl+Y", c:false}
+  ]},
+  { id:34, text:"What is the shortcut for cutting a text in MS-Word?", options:[
+      {t:"Ctrl+C", c:false},
+      {t:"Ctrl+X", c:true},
+      {t:"Ctrl+V", c:false},
+      {t:"Ctrl+Z", c:false},
+      {t:"Ctrl+K", c:false}
+  ]},
+  { id:35, text:"Which of the following is not a type of document view in Microsoft Word?", options:[
+      {t:"Draft", c:false},
+      {t:"Print Layout", c:false},
+      {t:"Web Layout", c:false},
+      {t:"Handwriting", c:true}
+  ]},
+  { id:36, text:"Which Toolbar is located directly next to the Microsoft Office Button?", options:[
+      {t:"Title Bar", c:false},
+      {t:"Ribbon", c:false},
+      {t:"Search toolbar", c:false},
+      {t:"Quick Access Toolbar", c:true}
+  ]},
+  { id:37, text:"Which Bar shows the document's or application name when it is opened in MS Word?", options:[
+      {t:"Quick Access Toolbar", c:false},
+      {t:"Title Bar", c:true},
+      {t:"Home tab", c:false},
+      {t:"Ribbon", c:false}
+  ]},
+  { id:38, text:"The number of tabs in the ribbon of Microsoft Word depends on the version of Word and the screen resolution of your device. However, in most recent versions of Word (such as Word 2019 or Word 365) there are typically 8 or 9 tabs in the ribbon.", options:[
+      {t:"True", c:true},
+      {t:"False", c:false}
+  ]},
+  { id:39, text:"There are several ways to save a Microsoft Word document, these includes all of the following except?", options:[
+      {t:"Click the \"Save\" button on the Quick Access Toolbar", c:false},
+      {t:"Click the \"File\" tab in the ribbon, then click \"Save\" or \"Save As\". If you choose \"Save As\", you can select a new location and/or file name for the document.", c:false},
+      {t:"If you are using the online version of MS-Word, you can type the name on the title bar and save", c:true},
+      {t:"Press the \"Ctrl\" + \"S\" shortcut keys.", c:false},
+      {t:"Press the \"Ctrl\" + \"Shift\" + \"S\" shortcut keys.", c:false}
+  ]},
+  { id:40, text:"Which of the following procedures helps you to save a word document as a pdf?", options:[
+      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Save As\". In the \"Save As\" dialog box, choose the location where you want to save the PDF file. Select \"PDF (*.pdf)\" from the \"Save as type\" drop-down menu. Click the \"Save\" button.", c:false},
+      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Print\" from the list on the left side of the screen. Choose \"Microsoft Print to PDF\" from the list of printers. Click the \"Print\" button. In the \"Save Print Output As\" dialog box, choose the location where you want to save the PDF file. Enter a file name for the PDF file. Click the \"Save\" button.", c:false},
+      {t:"Open the Word document you want to save as a PDF. Click the \"File\" tab on the ribbon. Click \"Export\" from the list on the left side of the screen. Choose \"Create PDF/XPS Document\" and click the \"Create PDF/XPS\" button. In the \"Publish as PDF or XPS\" dialog box, choose the location where you want to save the PDF file. Click the \"Publish\" button.", c:false},
+      {t:"All of the above", c:true}
+  ]},
+  { id:41, text:"Which of the following is used to change text colour in an MS Word document?", options:[
+      {t:"Font color", c:false},
+      {t:"Text highlight colour", c:false},
+      {t:"Shading", c:false},
+      {t:"Styles", c:false},
+      {t:"None of the above", c:false},
+      {t:"All of the above", c:true}
+  ]},
+  { id:42, text:"What is the purpose of sharing a Word document with others?", options:[
+      {t:"To show off your writing skills", c:false},
+      {t:"To make a backup copy of the document", c:false},
+      {t:"To collaborate and work on the same document together", c:true},
+      {t:"To keep the document private", c:false}
+  ]},
+  { id:43, text:"Which feature in Microsoft Word allows you to share a document with others via email or cloud storage?", options:[
+      {t:"Save As", c:false},
+      {t:"Track Changes", c:false},
+      {t:"Comments", c:false},
+      {t:"Share", c:true}
+  ]},
+  { id:44, text:"What is the benefit of saving a Word document to a cloud storage service like OneDrive or SharePoint?", options:[
+      {t:"It automatically backs up the document to a local hard drive", c:false},
+      {t:"It allows you to access and edit the document from anywhere with an internet connection", c:true},
+      {t:"It improves the formatting and layout of the document", c:false},
+      {t:"It helps you to prevent people from editing your document", c:false}
+  ]},
+  { id:45, text:"Which option in the Spelling and Grammar dialog box in Microsoft Word allows you to add a word to the dictionary?", options:[
+      {t:"Add to Dictionary", c:true},
+      {t:"Add", c:false},
+      {t:"Ignore", c:false},
+      {t:"Add to Thesaurus", c:false}
+  ]},
+  { id:46, text:"Which of the following is a proofreading technique that involves reading a document backwards, starting from the last sentence and working your way to the beginning?", options:[
+      {t:"Chunking", c:false},
+      {t:"Scanning", c:false},
+      {t:"Skimming", c:false},
+      {t:"Reverse Reading", c:true}
+  ]},
+  { id:47, text:"Which of the following is a proofreading technique that involves reading a document aloud to check for errors and inconsistencies?", options:[
+      {t:"Reading Out Loud", c:true},
+      {t:"Reciting", c:false},
+      {t:"Reading Loud", c:false},
+      {t:"Grammar Checker", c:false}
+  ]},
+  { id:48, text:"Which option in the Spelling and Grammar dialog box in Microsoft Word allows you to automatically correct a spelling or grammar error in a document?", options:[
+      {t:"AutoRight", c:false},
+      {t:"Ignore All", c:false},
+      {t:"AutoCorrect", c:true},
+      {t:"Change", c:false},
+      {t:"None Above", c:false}
+  ]},
+  { id:49, text:"Which of the following is a proofreading technique that involves reading a document quickly to get an overall sense of its content?", options:[
+      {t:"Skimming", c:true},
+      {t:"Scanning", c:false},
+      {t:"Chunking", c:false},
+      {t:"AutoCorrect", c:false}
+  ]},
+  { id:50, text:"What is the purpose of the Review tab in Microsoft Word?", options:[
+      {t:"To access sharing and collaboration features", c:false},
+      {t:"To format text and paragraphs in a document", c:false},
+      {t:"To add headers and footers to a document", c:false},
+      {t:"To track changes and add comments to a document", c:true}
+  ]},
+  { id:51, text:"What is the purpose of co-authoring in Microsoft Word?", options:[
+      {t:"To save a document in a different file format", c:false},
+      {t:"To track changes made by different users in the same document", c:false},
+      {t:"To allow multiple users to work on the same document simultaneously", c:true},
+      {t:"To help you type well", c:false},
+      {t:"None Above", c:false}
+  ]},
+  { id:52, text:"Which shortcut command is used to select all typed words in a document?", options:[
+      {t:"Ctrl + A", c:true},
+      {t:"Ctrl + C", c:false},
+      {t:"Ctrl + D", c:false},
+      {t:"Ctrl + U", c:false}
+  ]}
+];
 
-  // UTILS
-  function shuffleArray(a){
-    for(let i=a.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
+/* --- Utils --- */
+function shuffleArray(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  function escapeHtml(s){
-    return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
-  }
+  return a;
+}
 
-  // Render MCQs (shuffle questions and options)
-  function renderMCQs(){
-    const container = document.getElementById('questionsContainer');
-    container.innerHTML = '';
-    const qs = JSON.parse(JSON.stringify(mcQuestions));
-    shuffleArray(qs); // shuffle question order
-    qs.forEach((q) => {
-      shuffleArray(q.options); // shuffle options
-      const qDiv = document.createElement('div');
-      qDiv.className = 'question';
-      qDiv.id = 'q' + q.id;
+/* --- Render (shuffle only MCQs) --- */
+let shuffledQuestions = [];
+document.addEventListener('DOMContentLoaded', () => {
+  // create a copy and shuffle it
+  shuffledQuestions = shuffleArray(JSON.parse(JSON.stringify(mcQuestions)));
+  const container = document.getElementById('questionsContainer');
 
-      const header = document.createElement('div');
-      header.className = 'q-header';
-      header.innerHTML = `<div class="q-number">${q.id}</div><div class="q-text">${escapeHtml(q.text)}</div>`;
-      qDiv.appendChild(header);
+  shuffledQuestions.forEach((q, idx) => {
+    const displayNumber = idx + 3; // Q3..Q52
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
 
-      const optionsDiv = document.createElement('div');
-      optionsDiv.className = 'options';
+    // header
+    const header = document.createElement('div');
+    header.className = 'q-header';
+    header.innerHTML = `<div class="q-number">${displayNumber}</div><div class="q-text">${escapeHtml(q.text)}</div>`;
+    qDiv.appendChild(header);
 
-      q.options.forEach((opt, oi) => {
-        const optId = `q${q.id}_opt${oi}`;
-        const label = document.createElement('label');
-        label.className = 'option-label';
-        label.htmlFor = optId;
-        label.innerHTML = `<input id="${optId}" type="radio" name="q_${q.id}" value="${escapeHtml(opt.t)}" data-correct="${opt.c}" required> <span>${escapeHtml(opt.t)}</span>`;
-        optionsDiv.appendChild(label);
-      });
-
-      qDiv.appendChild(optionsDiv);
-      container.appendChild(qDiv);
+    // options
+    const opts = document.createElement('div');
+    opts.className = 'options';
+    q.options.forEach((opt, oi) => {
+      const optId = `q${q.id}_opt${oi}`;
+      const label = document.createElement('label');
+      label.className = 'option-label';
+      label.htmlFor = optId;
+      label.innerHTML = `<input id="${optId}" type="radio" name="q_${q.id}" value="${escapeHtml(opt.t)}"> <span>${escapeHtml(opt.t)}</span>`;
+      opts.appendChild(label);
     });
-  }
-
-  // Collect answers & score
-  function collectAndScore(){
-    let score = 0;
-    const answers = [];
-    for(const q of mcQuestions){
-      const name = `q_${q.id}`;
-      const radios = document.getElementsByName(name);
-      let answered = false;
-      for(const r of radios){
-        if(r.checked){
-          answered = true;
-          answers.push({ id: q.id, answer: r.value });
-          if(r.dataset.correct === "true") score++;
-          break;
-        }
-      }
-      if(!answered){
-        answers.push({ id: q.id, answer: "" });
-      }
-    }
-    return {score, answers};
-  }
-
-  // Send to Google Sheet
-  async function sendToSheet(payload){
-    if(!SCRIPT_URL || !SCRIPT_URL.startsWith('https://script.google.com/')){
-      console.warn('SCRIPT_URL not set - skipping POST to Google Sheet.');
-      return {ok:false, message:'No script URL provided.'};
-    }
-    try{
-      const resp = await fetch(SCRIPT_URL, {
-        method:'POST',
-        mode:'cors',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const j = await resp.json();
-      return {ok:true, result:j};
-    }catch(err){
-      console.error('Send error', err);
-      return {ok:false, message: err.message || String(err)};
-    }
-  }
-
-  // Form handler
-  async function handleSubmit(e){
-    e.preventDefault();
-    const form = document.getElementById('testForm');
-    if(!form.checkValidity()){
-      form.reportValidity();
-      return false;
-    }
-
-    const result = collectAndScore();
-    const score = result.score;
-    const total = mcQuestions.length; // 50
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    const payload = {
-      timestamp: new Date().toISOString(),
-      name,
-      email,
-      score,
-      total,
-      answers: result.answers
-    };
-
-    alert(`Your score: ${score} / ${total}\n\nThank you for completing the test!`);
-
-    // best-effort send
-    sendToSheet(payload).then(res=>{
-      if(!res.ok) console.warn('Submission not saved:', res.message);
-    });
-
-    // reset & reshuffle
-    form.reset();
-    document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
-    renderMCQs();
-    window.scrollTo({top:0, behavior:'smooth'});
-    return false;
-  }
-
-  // Restart-on-leave
-  window.addEventListener('beforeunload', function(e){
-    const f = document.getElementById('testForm');
-    if(f) f.reset();
+    qDiv.appendChild(opts);
+    container.appendChild(qDiv);
   });
 
-  // init
-  renderMCQs();
-  </script>
+  // make sure radios are not required globally (we check before submit)
+  // (if you want required per question, you can implement validation)
+});
+
+/* escape */
+function escapeHtml(s){
+  return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+}
+
+/* --- Submit handler --- */
+document.getElementById('quizForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  // validation: ensure every MCQ has an answer
+  const totalMCQ = shuffledQuestions.length;
+  let allAnswered = true;
+  const answers = [];
+
+  for(const q of shuffledQuestions){
+    const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
+    const ansText = sel ? sel.value : "";
+    if(!ansText) { allAnswered = false; }
+    answers.push({ id: q.id, answer: ansText });
+  }
+
+  if(!allAnswered){
+    if(!confirm("Some questions are unanswered. Submit anyway?")) return;
+  }
+
+  // scoring
+  let score = 0;
+  for(const q of shuffledQuestions){
+    const sel = document.querySelector(`input[name="q_${q.id}"]:checked`);
+    const ansText = sel ? sel.value : "";
+    const correctOpt = q.options.find(o => o.c);
+    if(correctOpt && ansText === correctOpt.t) score++;
+  }
+
+  // payload
+  const payload = {
+    timestamp: new Date().toISOString(),
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    score: score,
+    total: shuffledQuestions.length,
+    answers: answers
+  };
+
+  // show score to participant only
+  const resultDiv = document.getElementById('result');
+  resultDiv.textContent = `Your score: ${score} / ${shuffledQuestions.length}`;
+
+  // send to Google Apps Script (best-effort)
+  try {
+    const resp = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // some Apps Script deployments return JSON; ignore if CORS/no-cors block occurs
+    // try to parse if possible
+    try { await resp.json(); } catch(e){ /* ignore parse errors */ }
+  } catch(err){
+    console.warn('Submission to Apps Script failed (network/CORS):', err);
+  }
+
+  // disable form to prevent re-submit, keep result visible
+  this.querySelectorAll('input, button').forEach(i => i.disabled = true);
+});
+</script>
 </body>
 </html>
